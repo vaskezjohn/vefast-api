@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vafast_src.Domain.Exeptions.Company;
+using vafast_src.Domain.Exceptions.Company;
 using vafast_src.Domain.Repositories.Company;
 using vafast_src.DTO.Company;
 
