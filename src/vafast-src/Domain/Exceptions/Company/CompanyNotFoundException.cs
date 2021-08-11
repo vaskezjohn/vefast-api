@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vafast_src.Domain.Exeptions.Company
+namespace vafast_src.Domain.Exceptions.Company
 {
     public class CompanyNotFoundException : Exception
     {

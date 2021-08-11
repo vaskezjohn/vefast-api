@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace vafast_src.Domain.Exeptions.User
+namespace vafast_src.Domain.Exceptions.User
 {
     public class UserNotFoundException : Exception
     {
