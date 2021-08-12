@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vafast_src.Domain.Services.Company;
+using vefast_src.Domain.Services.Company;
 
 namespace vefast_api.Extension.DependencyInjection
 {

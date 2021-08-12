@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vafast_src.Domain.Entities.Company;
-using vafast_src.Domain.Repositories.Company;
-using vafast_src.Domain.Services.Company;
-using vafast_src.DTO.Company;
+using vefast_src.Domain.Entities.Company;
+using vefast_src.Domain.Repositories.Company;
+using vefast_src.Domain.Services.Company;
+using vefast_src.DTO.Company;
 
 namespace vefast_api.Controllers
 {

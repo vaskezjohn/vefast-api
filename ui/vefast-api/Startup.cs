@@ -1,7 +1,7 @@
 using AutoMapper.Extensions.ExpressionMapping;
 using System.Linq;
-using vafast_src.AutoMapper.Profiles;
-using vafast_src.Domain.Entities.Company;
+using vefast_src.AutoMapper.Profiles;
+using vefast_src.Domain.Entities.Company;
 using vefast_api.Extension.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
