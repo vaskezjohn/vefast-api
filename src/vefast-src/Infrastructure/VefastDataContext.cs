@@ -15,6 +15,7 @@ using vefast_src.Domain.Entities.Orders_item;
 using vefast_src.Domain.Entities.Orders;
 using vefast_src.Domain.Entities.User_group;
 using vefast_src.Domain.Entities.Groups;
+using vefast_src.Domain.Entities.User;
 
 namespace vefast_src.Infrastructure
 {
@@ -28,12 +29,13 @@ namespace vefast_src.Infrastructure
         public DbSet<Stores> Stores { get; set; }
         public DbSet<Brands> Brands { get; set; }
         public DbSet<Categories> Categories { get; set; }
-        public DbSet<Attribute_value> Attribute_value { get; set; }
+        public DbSet<Attribute_value> AttributeValue { get; set; }
         public DbSet<Attributes> Attributes { get; set; }
-        public DbSet<Orders_item> Orders_item { get; set; }
+        public DbSet<Orders_item> Ordersitem { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<User_group> User_group { get; set; }
+        public DbSet<User_group> UserGroup { get; set; }
         public DbSet<Groups> Groups { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
