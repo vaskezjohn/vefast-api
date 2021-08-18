@@ -44,6 +44,9 @@
     <None Remove="Domain\Repositories\Attribute_value\" />
     <None Remove="Domain\Repositories\Attributes\" />
     <None Remove="Domain\Repositories\Orders_item\" />
+    <None Remove="Domain\Repositories\Orders\" />
+    <None Remove="Domain\Repositories\User_group\" />
+    <None Remove="Domain\Repositories\Groups\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Entities\Stores\" />
@@ -73,5 +76,8 @@
     <Folder Include="Domain\Repositories\Attribute_value\" />
     <Folder Include="Domain\Repositories\Attributes\" />
     <Folder Include="Domain\Repositories\Orders_item\" />
+    <Folder Include="Domain\Repositories\Orders\" />
+    <Folder Include="Domain\Repositories\User_group\" />
+    <Folder Include="Domain\Repositories\Groups\" />
   </ItemGroup>
 </Project>
