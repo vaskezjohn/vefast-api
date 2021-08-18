@@ -63,6 +63,14 @@
     <None Remove="Domain\Services\Orders\" />
     <None Remove="Domain\Services\User_group\" />
     <None Remove="Domain\Services\Groups\" />
+    <None Remove="Infrastructure\Repositories\Brands\" />
+    <None Remove="Infrastructure\Repositories\Categories\" />
+    <None Remove="Infrastructure\Repositories\Attribute_value\" />
+    <None Remove="Infrastructure\Repositories\Attributes\" />
+    <None Remove="Infrastructure\Repositories\Orders_item\" />
+    <None Remove="Infrastructure\Repositories\Orders\" />
+    <None Remove="Infrastructure\Repositories\User_group\" />
+    <None Remove="Infrastructure\Repositories\Groups\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Entities\Stores\" />
@@ -111,5 +119,13 @@
     <Folder Include="Domain\Services\Orders\" />
     <Folder Include="Domain\Services\User_group\" />
     <Folder Include="Domain\Services\Groups\" />
+    <Folder Include="Infrastructure\Repositories\Brands\" />
+    <Folder Include="Infrastructure\Repositories\Categories\" />
+    <Folder Include="Infrastructure\Repositories\Attribute_value\" />
+    <Folder Include="Infrastructure\Repositories\Attributes\" />
+    <Folder Include="Infrastructure\Repositories\Orders_item\" />
+    <Folder Include="Infrastructure\Repositories\Orders\" />
+    <Folder Include="Infrastructure\Repositories\User_group\" />
+    <Folder Include="Infrastructure\Repositories\Groups\" />
   </ItemGroup>
 </Project>
