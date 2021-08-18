@@ -1,9 +1,9 @@
 ﻿using System;
 namespace vefast_src.Domain.Exceptions.Orders
 {
-    public class OrdersNotFoundExcpetion : Exception
+    public class OrdersNotFoundException : Exception
     {
-        public OrdersNotFoundExcpetion(string message) : base(message)
+        public OrdersNotFoundException(string message) : base(message)
         {
         }
     }
