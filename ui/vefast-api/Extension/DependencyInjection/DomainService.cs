@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using vefast_src.Domain.Services.Company;
 using vefast_src.Domain.Services.Products;
+using vefast_src.Domain.Services.Stores;
 
 namespace vefast_api.Extension.DependencyInjection
 {
@@ -15,6 +16,7 @@ namespace vefast_api.Extension.DependencyInjection
             /*AGREGO MI SERVICIO*/
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IStoresService, StoresService>();
             return services;
         }
     }

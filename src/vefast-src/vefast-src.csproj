@@ -16,4 +16,62 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Domain\Entities\Stores\" />
+    <None Remove="Domain\Exceptions\Stores\" />
+    <None Remove="Domain\Repositories\Stores\" />
+    <None Remove="DTO\Stores\" />
+    <None Remove="Domain\Services\Stores\" />
+    <None Remove="Infrastructure\Repositories\Stores\" />
+    <None Remove="Domain\Entities\Brands\" />
+    <None Remove="Domain\Entities\Categories\" />
+    <None Remove="Domain\Entities\Attribute_value\" />
+    <None Remove="Domain\Entities\Attributes\" />
+    <None Remove="Domain\Entities\Orders_item\" />
+    <None Remove="Domain\Entities\Orders\" />
+    <None Remove="Domain\Entities\User_group\" />
+    <None Remove="Domain\Entities\Groups\" />
+    <None Remove="Domain\Exceptions\Brands\" />
+    <None Remove="Domain\Exceptions\Categories\" />
+    <None Remove="Domain\Exceptions\Attribute_value\" />
+    <None Remove="Domain\Exceptions\Attributes\" />
+    <None Remove="Domain\Exceptions\Orders_item\" />
+    <None Remove="Domain\Exceptions\Orders\" />
+    <None Remove="Domain\Exceptions\User_group\" />
+    <None Remove="Domain\Exceptions\Groups\" />
+    <None Remove="Domain\Repositories\Brands\" />
+    <None Remove="Domain\Repositories\Categories\" />
+    <None Remove="Domain\Repositories\Attribute_value\" />
+    <None Remove="Domain\Repositories\Attributes\" />
+    <None Remove="Domain\Repositories\Orders_item\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Entities\Stores\" />
+    <Folder Include="Domain\Exceptions\Stores\" />
+    <Folder Include="Domain\Repositories\Stores\" />
+    <Folder Include="DTO\Stores\" />
+    <Folder Include="Domain\Services\Stores\" />
+    <Folder Include="Infrastructure\Repositories\Stores\" />
+    <Folder Include="Domain\Entities\Brands\" />
+    <Folder Include="Domain\Entities\Categories\" />
+    <Folder Include="Domain\Entities\Attribute_value\" />
+    <Folder Include="Domain\Entities\Attributes\" />
+    <Folder Include="Domain\Entities\Orders_item\" />
+    <Folder Include="Domain\Entities\Orders\" />
+    <Folder Include="Domain\Entities\User_group\" />
+    <Folder Include="Domain\Entities\Groups\" />
+    <Folder Include="Domain\Exceptions\Brands\" />
+    <Folder Include="Domain\Exceptions\Categories\" />
+    <Folder Include="Domain\Exceptions\Attribute_value\" />
+    <Folder Include="Domain\Exceptions\Attributes\" />
+    <Folder Include="Domain\Exceptions\Orders_item\" />
+    <Folder Include="Domain\Exceptions\Orders\" />
+    <Folder Include="Domain\Exceptions\User_group\" />
+    <Folder Include="Domain\Exceptions\Groups\" />
+    <Folder Include="Domain\Repositories\Brands\" />
+    <Folder Include="Domain\Repositories\Categories\" />
+    <Folder Include="Domain\Repositories\Attribute_value\" />
+    <Folder Include="Domain\Repositories\Attributes\" />
+    <Folder Include="Domain\Repositories\Orders_item\" />
+  </ItemGroup>
 </Project>

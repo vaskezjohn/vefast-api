@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace vefast_src.Domain.Entities.User
 {
-    public class User
+    public class User : BaseEntity
     {
 		public Guid ID { get; set; }
 		public string user { get; set; }

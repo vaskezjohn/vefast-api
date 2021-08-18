@@ -6,7 +6,7 @@
     public class ProductsRepositoryEF : GenericRepository<Products>, IProductsRepository
     {
         public ProductsRepositoryEF(VefastDataContext context)
-      : base(context)
+        : base(context)
         {
         }
     }

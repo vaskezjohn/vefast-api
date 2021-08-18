@@ -7,6 +7,8 @@ using vefast_src.Infrastructure;
 using vefast_src.Infrastructure.Repositories.Company;
 using vefast_src.Domain.Repositories.Products;
 using vefast_src.Infrastructure.Repositories.Products;
+using vefast_src.Domain.Repositories.Stores;
+using vefast_src.Infrastructure.Repositories.Stores;
 
 
 namespace vefast_api.Extension.DependencyInjection
@@ -24,7 +26,7 @@ namespace vefast_api.Extension.DependencyInjection
             /*AGREGO MI REPOSITORIO*/
             services.AddTransient<ICompanyRepository, CompanyRepositoryEF>();
             services.AddTransient<IProductsRepository, ProductsRepositoryEF>();
-
+            services.AddTransient<IStoresRepository, StoresRepositoryEF>();
 
             return services;
         }
