@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace vefast_src.Domain.Entities.User
 {
-    public class User : BaseEntity
+    public class User
     {
+		[Key]
 		public Guid ID { get; set; }
 		public string user { get; set; }
 		public string password { get; set; }
