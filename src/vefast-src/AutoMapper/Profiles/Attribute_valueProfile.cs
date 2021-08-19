@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using vefast_src.Domain.Entities.Attribute_value;
-using vefast_src.DTO.Attribute_value;
+using vefast_src.Domain.Entities.AttributeValue;
+using vefast_src.DTO.AttributeValue;
 
 namespace vefast_src.AutoMapper.Profiles
 {
@@ -8,10 +8,10 @@ namespace vefast_src.AutoMapper.Profiles
     {
         public Attribute_valueProfile()
         {
-            CreateMap<Attribute_value, Attribute_valueResponse>()
+            CreateMap<AttributeValue, AttributeValueResponse>()
                 .ReverseMap()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<Attribute_value, Attribute_valueRequest>()
+            CreateMap<AttributeValue, AttributeValueRequest>()
                     .ReverseMap()
                     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }

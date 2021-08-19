@@ -18,16 +18,16 @@ namespace vefast_src.Domain.Entities
         }
 
         private DateTime _insertDate;
-        private User.User _userInsert;
+        private Users.Users _userInsert;
         private DateTime _updateDate;
-        private User.User _updateUser;
+        private Users.Users _updateUser;
 
         public DateTime InsertDate
         {
             get { return _insertDate; }
             set { _insertDate = value; }
         }
-        public virtual User.User InsertUser
+        public virtual Users.Users InsertUser
         {
             get { return _userInsert; }
             set { _userInsert = value; }
@@ -37,7 +37,7 @@ namespace vefast_src.Domain.Entities
             get { return _updateDate; }
             set { _updateDate = value; }
         }
-        public virtual User.User UpdateUser
+        public virtual Users.Users UpdateUser
         {
             get { return _updateUser; }
             set { _updateUser = value; }

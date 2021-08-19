@@ -1,8 +1,8 @@
 ﻿namespace vefast_src.Domain.Repositories.User
 {
-    using vefast_src.Domain.Entities.User;
+    using vefast_src.Domain.Entities.Users;
 
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IUserRepository : IGenericRepository<Users>
     {
     }
 }

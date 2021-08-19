@@ -8,11 +8,11 @@ using vefast_src.Domain.Services.Products;
 using vefast_src.Domain.Services.Stores;
 using vefast_src.Domain.Services.Brands;
 using vefast_src.Domain.Services.Categories;
-using vefast_src.Domain.Services.Attribute_value;
+using vefast_src.Domain.Services.AttributeValue;
 using vefast_src.Domain.Services.Attributes;
-using vefast_src.Domain.Services.Orders_item;
+using vefast_src.Domain.Services.OrdersItem;
 using vefast_src.Domain.Services.Orders;
-using vefast_src.Domain.Services.User_group;
+using vefast_src.Domain.Services.UserGroup;
 using vefast_src.Domain.Services.Groups;
 
 namespace vefast_api.Extension.DependencyInjection
@@ -27,11 +27,11 @@ namespace vefast_api.Extension.DependencyInjection
             services.AddTransient<IStoresService, StoresService>();
             services.AddTransient<IBrandsService, BrandsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
-            services.AddTransient<IAttribute_valueService, Attribute_valueService>();
+            services.AddTransient<IAttributeValueService, AttributeValueService>();
             services.AddTransient<IAttributesService, AttributesService>();
-            services.AddTransient<IOrders_itemService, Orders_itemService>();
+            services.AddTransient<IOrdersItemService, OrdersItemService>();
             services.AddTransient<IOrdersService, OrdersService>();
-            services.AddTransient<IUser_groupService, User_groupService>();
+            services.AddTransient<IUserGroupService, UserGroupService>();
             services.AddTransient<IGroupsService, GroupsService>();
 
             return services;

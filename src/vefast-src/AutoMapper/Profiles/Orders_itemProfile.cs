@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using vefast_src.Domain.Entities.Orders_item;
-using vefast_src.DTO.Orders_item;
+using vefast_src.Domain.Entities.OrdersItem;
+using vefast_src.DTO.OrdersItem;
 
 namespace vefast_src.AutoMapper.Profiles
 {
@@ -8,10 +8,10 @@ namespace vefast_src.AutoMapper.Profiles
     {
         public Orders_itemProfile()
         {
-            CreateMap<Orders_item, Orders_itemResponse>()
+            CreateMap<OrdersItem, OrdersItemResponse>()
                 .ReverseMap()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<Orders_item, Orders_itemRequest>()
+            CreateMap<OrdersItem, OrdersItemRequest>()
                     .ReverseMap()
                     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }

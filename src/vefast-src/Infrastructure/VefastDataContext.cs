@@ -9,13 +9,13 @@ using vefast_src.Domain.Entities.Products;
 using vefast_src.Domain.Entities.Stores;
 using vefast_src.Domain.Entities.Brands;
 using vefast_src.Domain.Entities.Categories;
-using vefast_src.Domain.Entities.Attribute_value;
+using vefast_src.Domain.Entities.AttributeValue;
 using vefast_src.Domain.Entities.Attributes;
-using vefast_src.Domain.Entities.Orders_item;
+using vefast_src.Domain.Entities.OrdersItem;
 using vefast_src.Domain.Entities.Orders;
-using vefast_src.Domain.Entities.User_group;
+using vefast_src.Domain.Entities.UserGroup;
 using vefast_src.Domain.Entities.Groups;
-using vefast_src.Domain.Entities.User;
+using vefast_src.Domain.Entities.Users;
 
 namespace vefast_src.Infrastructure
 {
@@ -29,13 +29,13 @@ namespace vefast_src.Infrastructure
         public DbSet<Stores> Stores { get; set; }
         public DbSet<Brands> Brands { get; set; }
         public DbSet<Categories> Categories { get; set; }
-        public DbSet<Attribute_value> AttributeValue { get; set; }
+        public DbSet<AttributeValue> AttributeValue { get; set; }
         public DbSet<Attributes> Attributes { get; set; }
-        public DbSet<Orders_item> Ordersitem { get; set; }
+        public DbSet<OrdersItem> Ordersitem { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<User_group> UserGroup { get; set; }
+        public DbSet<UserGroup> UserGroup { get; set; }
         public DbSet<Groups> Groups { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
