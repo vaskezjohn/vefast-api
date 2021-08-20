@@ -67,7 +67,7 @@ namespace vefast_src.Domain.Services.AttributeValue
             return _mapper.Map<AttributeValueResponse>(attribute_value);
         }
 
-        public async Task DeleteAttribute_valueById(Guid id)
+        public async Task DeleteAttributeValueById(Guid id)
         {
             var attribute_value = _attributeValueRepository.GetByID(id);
 

@@ -6,45 +6,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Company;
-using vefast_src.Domain.Repositories.Company;
-using vefast_src.Domain.Services.Company;
-using vefast_src.DTO.Company;
+using vefast_src.Domain.Entities.UserGroup;
+using vefast_src.Domain.Repositories.UserGroup;
+using vefast_src.Domain.Services.UserGroup;
+using vefast_src.DTO.UserGroup;
 
 namespace vefast_api.Controllers
 {
-    //[Authorize]
-    [ApiController]
-    [Route("[controller]")]
-    public class CompanyController : ControllerBase
+    public class UserGroupController : ControllerBase
     {
-        private readonly ICompanyService _companyService;
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IUserGroupService _userGroupService;
+        private readonly IUserGroupRepository _userGroupRepository;
 
-        public CompanyController(ICompanyService companyService, ICompanyRepository companyRepository)
+        public UserGroupController(IUserGroupService userGroupService, IUserGroupRepository userGroupRepository)
         {
-            _companyService = companyService;
-            _companyRepository = companyRepository;
+            _userGroupService = userGroupService;
+            _userGroupRepository = userGroupRepository;
         }
 
         [HttpGet]
         [EnableQuery()]
         [Route("odata/[controller]")]
-        public IQueryable<Company> Get()
+        public IQueryable<UserGroup> Get()
         {
-            return _companyRepository.GetAll();
+            return _userGroupRepository.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCompanyByIdAsync([FromRoute] string id)
+        public async Task<IActionResult> GetUserGroupByIdAsync([FromRoute] string id)
         {
             try
             {
                 Guid g = Guid.NewGuid();
 
-                var company = await _companyService.GetCompanyByIdAsync(new Guid(id));
+                var userGroup = await _userGroupService.GetUserGroupByIdAsync(new Guid(id));
 
-                return StatusCode(StatusCodes.Status200OK, new { data = company });
+                return StatusCode(StatusCodes.Status200OK, new { data = userGroup });
 
             }
             catch (NullReferenceException)
@@ -59,14 +56,14 @@ namespace vefast_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCompanyAsync([FromBody] CompanyRequest obj)
+        public async Task<IActionResult> CreateUserGroupAsync([FromBody] UserGroupRequest obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var company = await _companyService.CreateCompanyAsync(obj);
-                    return StatusCode(StatusCodes.Status201Created, new { data = company });
+                    var userGroup = await _userGroupService.CreateUserGroupAsync(obj);
+                    return StatusCode(StatusCodes.Status201Created, new { data = userGroup });
                 }
                 else
                 {
@@ -83,15 +80,15 @@ namespace vefast_api.Controllers
             }
 
         }
-             
+
         [HttpDelete("{id}")]
-        public IActionResult DeletecompanyCentroById([FromRoute] string id)
+        public IActionResult DeleteuserGroupCentroById([FromRoute] string id)
         {
             try
             {
-                _companyService.DeleteCompanyById(new Guid(id));
+                _userGroupService.DeleteUserGroupById(new Guid(id));
 
-                return StatusCode(StatusCodes.Status200OK, new { Message = "La empresa fue borrada con éxito." });
+                return StatusCode(StatusCodes.Status200OK, new { Message = "El grupo de usuarios fue borrado con éxito." });
 
             }
             catch (NullReferenceException)
@@ -105,7 +102,7 @@ namespace vefast_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCompanyByIdAsync([FromRoute] string id, [FromBody] CompanyRequest obj)
+        public async Task<IActionResult> EditUserGroupByIdAsync([FromRoute] string id, [FromBody] UserGroupRequest obj)
         {
 
             try
@@ -113,12 +110,12 @@ namespace vefast_api.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var prestador = await _companyService.EditCompanyByIdAsync(new Guid(id), obj);
+                    var prestador = await _userGroupService.EditUserGroupByIdAsync(new Guid(id), obj);
 
                     return StatusCode(StatusCodes.Status200OK,
                                     new
                                     {
-                                        Message = "La empresa fue actualizada con éxito.",
+                                        Message = "El grupo de usuarios fue actualizado con éxito.",
                                         Data = prestador
                                     });
 

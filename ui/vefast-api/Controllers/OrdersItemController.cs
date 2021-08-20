@@ -6,45 +6,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Company;
-using vefast_src.Domain.Repositories.Company;
-using vefast_src.Domain.Services.Company;
-using vefast_src.DTO.Company;
+using vefast_src.Domain.Entities.OrdersItem;
+using vefast_src.Domain.Repositories.OrdersItem;
+using vefast_src.Domain.Services.OrdersItem;
+using vefast_src.DTO.OrdersItem;
 
 namespace vefast_api.Controllers
 {
     //[Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class CompanyController : ControllerBase
+    public class OrdersItemController : ControllerBase
     {
-        private readonly ICompanyService _companyService;
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IOrdersItemService _ordersItemService;
+        private readonly IOrdersItemRepository _ordersItemRepository;
 
-        public CompanyController(ICompanyService companyService, ICompanyRepository companyRepository)
+        public OrdersItemController(IOrdersItemService ordersItemService, IOrdersItemRepository ordersItemRepository)
         {
-            _companyService = companyService;
-            _companyRepository = companyRepository;
+            _ordersItemService = ordersItemService;
+            _ordersItemRepository = ordersItemRepository;
         }
 
         [HttpGet]
         [EnableQuery()]
         [Route("odata/[controller]")]
-        public IQueryable<Company> Get()
+        public IQueryable<OrdersItem> Get()
         {
-            return _companyRepository.GetAll();
+            return _ordersItemRepository.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCompanyByIdAsync([FromRoute] string id)
+        public async Task<IActionResult> GetOrdersItemByIdAsync([FromRoute] string id)
         {
             try
             {
                 Guid g = Guid.NewGuid();
 
-                var company = await _companyService.GetCompanyByIdAsync(new Guid(id));
+                var ordersItem = await _ordersItemService.GetOrdersItemByIdAsync(new Guid(id));
 
-                return StatusCode(StatusCodes.Status200OK, new { data = company });
+                return StatusCode(StatusCodes.Status200OK, new { data = ordersItem });
 
             }
             catch (NullReferenceException)
@@ -59,14 +59,14 @@ namespace vefast_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCompanyAsync([FromBody] CompanyRequest obj)
+        public async Task<IActionResult> CreateOrdersItemAsync([FromBody] OrdersItemRequest obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var company = await _companyService.CreateCompanyAsync(obj);
-                    return StatusCode(StatusCodes.Status201Created, new { data = company });
+                    var ordersItem = await _ordersItemService.CreateOrdersItemAsync(obj);
+                    return StatusCode(StatusCodes.Status201Created, new { data = ordersItem });
                 }
                 else
                 {
@@ -83,15 +83,15 @@ namespace vefast_api.Controllers
             }
 
         }
-             
+
         [HttpDelete("{id}")]
-        public IActionResult DeletecompanyCentroById([FromRoute] string id)
+        public IActionResult DeleteordersItemCentroById([FromRoute] string id)
         {
             try
             {
-                _companyService.DeleteCompanyById(new Guid(id));
+                _ordersItemService.DeleteOrdersItemById(new Guid(id));
 
-                return StatusCode(StatusCodes.Status200OK, new { Message = "La empresa fue borrada con éxito." });
+                return StatusCode(StatusCodes.Status200OK, new { Message = "El item fue borrado con éxito." });
 
             }
             catch (NullReferenceException)
@@ -105,7 +105,7 @@ namespace vefast_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCompanyByIdAsync([FromRoute] string id, [FromBody] CompanyRequest obj)
+        public async Task<IActionResult> EditOrdersItemByIdAsync([FromRoute] string id, [FromBody] OrdersItemRequest obj)
         {
 
             try
@@ -113,12 +113,12 @@ namespace vefast_api.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var prestador = await _companyService.EditCompanyByIdAsync(new Guid(id), obj);
+                    var prestador = await _ordersItemService.EditOrdersItemByIdAsync(new Guid(id), obj);
 
                     return StatusCode(StatusCodes.Status200OK,
                                     new
                                     {
-                                        Message = "La empresa fue actualizada con éxito.",
+                                        Message = "El item fue actualizado con éxito.",
                                         Data = prestador
                                     });
 

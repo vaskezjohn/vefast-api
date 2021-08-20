@@ -6,45 +6,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Company;
-using vefast_src.Domain.Repositories.Company;
-using vefast_src.Domain.Services.Company;
-using vefast_src.DTO.Company;
+using vefast_src.Domain.Entities.Attributes;
+using vefast_src.Domain.Repositories.Attributes;
+using vefast_src.Domain.Services.Attributes;
+using vefast_src.DTO.Attributes;
 
 namespace vefast_api.Controllers
 {
     //[Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class CompanyController : ControllerBase
+    public class AttributesController : ControllerBase
     {
-        private readonly ICompanyService _companyService;
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IAttributesService _attributesService;
+        private readonly IAttributesRepository _attributesRepository;
 
-        public CompanyController(ICompanyService companyService, ICompanyRepository companyRepository)
+        public AttributesController(IAttributesService attributesService, IAttributesRepository attributesRepository)
         {
-            _companyService = companyService;
-            _companyRepository = companyRepository;
+            _attributesService = attributesService;
+            _attributesRepository = attributesRepository;
         }
 
         [HttpGet]
         [EnableQuery()]
         [Route("odata/[controller]")]
-        public IQueryable<Company> Get()
+        public IQueryable<Attributes> Get()
         {
-            return _companyRepository.GetAll();
+            return _attributesRepository.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCompanyByIdAsync([FromRoute] string id)
+        public async Task<IActionResult> GetAttributesByIdAsync([FromRoute] string id)
         {
             try
             {
                 Guid g = Guid.NewGuid();
 
-                var company = await _companyService.GetCompanyByIdAsync(new Guid(id));
+                var attributes = await _attributesService.GetAttributesByIdAsync(new Guid(id));
 
-                return StatusCode(StatusCodes.Status200OK, new { data = company });
+                return StatusCode(StatusCodes.Status200OK, new { data = attributes });
 
             }
             catch (NullReferenceException)
@@ -59,14 +59,14 @@ namespace vefast_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCompanyAsync([FromBody] CompanyRequest obj)
+        public async Task<IActionResult> CreateAttributesAsync([FromBody] AttributesRequest obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var company = await _companyService.CreateCompanyAsync(obj);
-                    return StatusCode(StatusCodes.Status201Created, new { data = company });
+                    var attributes = await _attributesService.CreateAttributesAsync(obj);
+                    return StatusCode(StatusCodes.Status201Created, new { data = attributes });
                 }
                 else
                 {
@@ -83,15 +83,15 @@ namespace vefast_api.Controllers
             }
 
         }
-             
+
         [HttpDelete("{id}")]
-        public IActionResult DeletecompanyCentroById([FromRoute] string id)
+        public IActionResult DeleteattributesCentroById([FromRoute] string id)
         {
             try
             {
-                _companyService.DeleteCompanyById(new Guid(id));
+                _attributesService.DeleteAttributesById(new Guid(id));
 
-                return StatusCode(StatusCodes.Status200OK, new { Message = "La empresa fue borrada con éxito." });
+                return StatusCode(StatusCodes.Status200OK, new { Message = "El atributo fue borrado con éxito." });
 
             }
             catch (NullReferenceException)
@@ -105,7 +105,7 @@ namespace vefast_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCompanyByIdAsync([FromRoute] string id, [FromBody] CompanyRequest obj)
+        public async Task<IActionResult> EditAttributesByIdAsync([FromRoute] string id, [FromBody] AttributesRequest obj)
         {
 
             try
@@ -113,12 +113,12 @@ namespace vefast_api.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var prestador = await _companyService.EditCompanyByIdAsync(new Guid(id), obj);
+                    var prestador = await _attributesService.EditAttributesByIdAsync(new Guid(id), obj);
 
                     return StatusCode(StatusCodes.Status200OK,
                                     new
                                     {
-                                        Message = "La empresa fue actualizada con éxito.",
+                                        Message = "El atributo fue actualizado con éxito.",
                                         Data = prestador
                                     });
 

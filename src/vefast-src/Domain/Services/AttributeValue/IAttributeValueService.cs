@@ -10,7 +10,7 @@ namespace vefast_src.Domain.Services.AttributeValue
         IEnumerable<AttributeValueResponse> GetAllAttributeValue();
         Task<AttributeValueResponse> CreateAttributeValueAsync(AttributeValueRequest objRequest);
         Task<AttributeValueResponse> GetAttributeValueByIdAsync(Guid id);
-        Task DeleteAttribute_valueById(Guid id);
+        Task DeleteAttributeValueById(Guid id);
         Task<AttributeValueResponse> EditAttributeValueByIdAsync(Guid id, AttributeValueRequest objRequest);
     }
 }
