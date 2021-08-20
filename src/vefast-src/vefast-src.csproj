@@ -1,0 +1,113 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>vefast_src</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Domain\Entities\Stores\" />
+    <None Remove="Domain\Exceptions\Stores\" />
+    <None Remove="Domain\Repositories\Stores\" />
+    <None Remove="DTO\Stores\" />
+    <None Remove="Domain\Services\Stores\" />
+    <None Remove="Infrastructure\Repositories\Stores\" />
+    <None Remove="Domain\Entities\Brands\" />
+    <None Remove="Domain\Entities\Categories\" />
+    <None Remove="Domain\Entities\Attribute_value\" />
+    <None Remove="Domain\Entities\Attributes\" />
+    <None Remove="Domain\Entities\Orders_item\" />
+    <None Remove="Domain\Entities\Orders\" />
+    <None Remove="Domain\Entities\User_group\" />
+    <None Remove="Domain\Entities\Groups\" />
+    <None Remove="Domain\Exceptions\Brands\" />
+    <None Remove="Domain\Exceptions\Categories\" />
+    <None Remove="Domain\Exceptions\Attribute_value\" />
+    <None Remove="Domain\Exceptions\Attributes\" />
+    <None Remove="Domain\Exceptions\Orders_item\" />
+    <None Remove="Domain\Exceptions\Orders\" />
+    <None Remove="Domain\Exceptions\User_group\" />
+    <None Remove="Domain\Exceptions\Groups\" />
+    <None Remove="Domain\Repositories\Brands\" />
+    <None Remove="Domain\Repositories\Categories\" />
+    <None Remove="Domain\Repositories\Attribute_value\" />
+    <None Remove="Domain\Repositories\Attributes\" />
+    <None Remove="Domain\Repositories\Orders_item\" />
+    <None Remove="Domain\Repositories\Orders\" />
+    <None Remove="Domain\Repositories\User_group\" />
+    <None Remove="Domain\Repositories\Groups\" />
+    <None Remove="DTO\Brands\" />
+    <None Remove="DTO\Categories\" />
+    <None Remove="DTO\Attribute_value\" />
+    <None Remove="DTO\Attributes\" />
+    <None Remove="DTO\Orders_item\" />
+    <None Remove="DTO\Orders\" />
+    <None Remove="DTO\User_group\" />
+    <None Remove="DTO\Groups\" />
+    <None Remove="Domain\Services\Brands\" />
+    <None Remove="Domain\Services\Categories\" />
+    <None Remove="Domain\Services\Attribute_value\" />
+    <None Remove="Domain\Services\Attributes\" />
+    <None Remove="Domain\Services\Orders_item\" />
+    <None Remove="Domain\Services\Orders\" />
+    <None Remove="Domain\Services\User_group\" />
+    <None Remove="Domain\Services\Groups\" />
+    <None Remove="Infrastructure\Repositories\Brands\" />
+    <None Remove="Infrastructure\Repositories\Categories\" />
+    <None Remove="Infrastructure\Repositories\Attribute_value\" />
+    <None Remove="Infrastructure\Repositories\Attributes\" />
+    <None Remove="Infrastructure\Repositories\Orders_item\" />
+    <None Remove="Infrastructure\Repositories\Orders\" />
+    <None Remove="Infrastructure\Repositories\User_group\" />
+    <None Remove="Infrastructure\Repositories\Groups\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Entities\Stores\" />
+    <Folder Include="Domain\Exceptions\Stores\" />
+    <Folder Include="Domain\Repositories\Stores\" />
+    <Folder Include="DTO\Stores\" />
+    <Folder Include="Domain\Services\Stores\" />
+    <Folder Include="Infrastructure\Repositories\Stores\" />
+    <Folder Include="Domain\Entities\Brands\" />
+    <Folder Include="Domain\Entities\Categories\" />
+    <Folder Include="Domain\Entities\Attributes\" />
+    <Folder Include="Domain\Entities\Orders\" />
+    <Folder Include="Domain\Entities\Groups\" />
+    <Folder Include="Domain\Exceptions\Brands\" />
+    <Folder Include="Domain\Exceptions\Categories\" />
+    <Folder Include="Domain\Exceptions\Attributes\" />
+    <Folder Include="Domain\Exceptions\Orders\" />
+    <Folder Include="Domain\Exceptions\Groups\" />
+    <Folder Include="Domain\Repositories\Brands\" />
+    <Folder Include="Domain\Repositories\Categories\" />
+    <Folder Include="Domain\Repositories\Attributes\" />
+    <Folder Include="Domain\Repositories\Orders\" />
+    <Folder Include="Domain\Repositories\Groups\" />
+    <Folder Include="DTO\Brands\" />
+    <Folder Include="DTO\Categories\" />
+    <Folder Include="DTO\Attributes\" />
+    <Folder Include="DTO\Orders\" />
+    <Folder Include="DTO\Groups\" />
+    <Folder Include="Domain\Services\Brands\" />
+    <Folder Include="Domain\Services\Categories\" />
+    <Folder Include="Domain\Services\Attributes\" />
+    <Folder Include="Domain\Services\Orders\" />
+    <Folder Include="Domain\Services\Groups\" />
+    <Folder Include="Infrastructure\Repositories\Brands\" />
+    <Folder Include="Infrastructure\Repositories\Categories\" />
+    <Folder Include="Infrastructure\Repositories\Attributes\" />
+    <Folder Include="Infrastructure\Repositories\Orders\" />
+    <Folder Include="Infrastructure\Repositories\Groups\" />
+  </ItemGroup>
+</Project>
