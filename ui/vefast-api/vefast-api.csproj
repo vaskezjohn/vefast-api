@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>vefast_api</RootNamespace>
+    <UserSecretsId>bfb3a5fa-1df5-4704-8a20-6433faca803d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
