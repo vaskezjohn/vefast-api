@@ -40,10 +40,15 @@ namespace vefast_api.Extension.DependencyInjection
         public static IServiceCollection AddInfrastructure(this IServiceCollection services,
              IConfiguration configuration)
         {
-            services.AddDbContext<VefastDataContext>(options =>
-            {
-                options.UseMySql(configuration.GetConnectionString("vefast"), new MySqlServerVersion(new Version(8, 0, 25)));
-            });
+            services.AddDbContext<VefastDataContext>(options => options
+                .UseMySql(configuration.GetConnectionString("vefast"), new MySqlServerVersion(new Version(8, 0, 25)),
+                    mySqlOptionsAction: mySqlOptions =>
+                    {
+                        mySqlOptions.EnableRetryOnFailure();
+                    })
+                );
+
+            //new MySqlServerVersion(new Version(8, 0, 25))
 
             /*AGREGO MI REPOSITORIO*/
             services.AddTransient<ICompanyRepository, CompanyRepositoryEF>();
