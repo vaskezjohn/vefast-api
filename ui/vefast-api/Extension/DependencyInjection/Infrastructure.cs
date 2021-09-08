@@ -25,6 +25,12 @@ using vefast_src.Domain.Repositories.UserGroup;
 using vefast_src.Infrastructure.Repositories.UserGroup;
 using vefast_src.Domain.Repositories.Groups;
 using vefast_src.Infrastructure.Repositories.Groups;
+using vefast_src.Infrastructure.Repositories.Stock;
+using vefast_src.Domain.Repositories.Stock;
+using vefast_src.Infrastructure.Repositories.TipoProducto;
+using vefast_src.Domain.Repositories.TipoProducto;
+using vefast_src.Infrastructure.Repositories.AttributeValueTipoProducto;
+using vefast_src.Domain.Repositories.AttributeValueTipoProducto;
 
 
 namespace vefast_api.Extension.DependencyInjection
@@ -34,10 +40,15 @@ namespace vefast_api.Extension.DependencyInjection
         public static IServiceCollection AddInfrastructure(this IServiceCollection services,
              IConfiguration configuration)
         {
-            services.AddDbContext<VefastDataContext>(options =>
-            {
-                options.UseMySql(configuration.GetConnectionString("vefast"), new MySqlServerVersion(new Version(8, 0, 25)));
-            });
+            services.AddDbContext<VefastDataContext>(options => options
+                .UseMySql(configuration.GetConnectionString("vefast"), new MySqlServerVersion(new Version(8, 0, 25)),
+                    mySqlOptionsAction: mySqlOptions =>
+                    {
+                        mySqlOptions.EnableRetryOnFailure();
+                    })
+                );
+
+            //new MySqlServerVersion(new Version(8, 0, 25))
 
             /*AGREGO MI REPOSITORIO*/
             services.AddTransient<ICompanyRepository, CompanyRepositoryEF>();
@@ -51,6 +62,10 @@ namespace vefast_api.Extension.DependencyInjection
             services.AddTransient<IOrdersRepository, OrdersRepositoryEF>();
             services.AddTransient<IUserGroupRepository, UserGroupRepositoryEF>();
             services.AddTransient<IGroupsRepository, GroupsRepositoryEF>();
+            services.AddTransient<IStockRepository, StockRepositoryEF>();
+            services.AddTransient<ITipoProductoRepository, TipoProductoRepositoryEF>();
+            services.AddTransient<IAttributeValueTipoProductoRepository, AttributeValueTipoProductoRepositoryEF>();
+
 
             return services;
         }

@@ -71,6 +71,24 @@
     <None Remove="Infrastructure\Repositories\Orders\" />
     <None Remove="Infrastructure\Repositories\User_group\" />
     <None Remove="Infrastructure\Repositories\Groups\" />
+    <None Remove="Domain\Entities\TipoProducto\" />
+    <None Remove="Domain\Entities\AttribueValueTipoProducto\" />
+    <None Remove="Domain\Exceptions\TipoProducto\" />
+    <None Remove="Domain\Exceptions\AttribueValueTipoProducto\" />
+    <None Remove="Domain\Entities\Stock\" />
+    <None Remove="Domain\Exceptions\Stock\" />
+    <None Remove="Domain\Repositories\TipoProductos\" />
+    <None Remove="Domain\Repositories\AttribueValueTipoProducto\" />
+    <None Remove="Domain\Repositories\Stock\" />
+    <None Remove="DTO\TipoProducto\" />
+    <None Remove="DTO\Stock\" />
+    <None Remove="DTO\AttribueValueTipoProducto\" />
+    <None Remove="Domain\Services\Stock\" />
+    <None Remove="Domain\Services\TipoProducto\" />
+    <None Remove="Domain\Services\AttribueValueTipoProducto\" />
+    <None Remove="Infrastructure\Repositories\Stock\" />
+    <None Remove="Infrastructure\Repositories\TipoProducto\" />
+    <None Remove="Infrastructure\Repositories\AttributeValueTipoProducto\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Entities\Stores\" />
@@ -109,5 +127,23 @@
     <Folder Include="Infrastructure\Repositories\Attributes\" />
     <Folder Include="Infrastructure\Repositories\Orders\" />
     <Folder Include="Infrastructure\Repositories\Groups\" />
+    <Folder Include="Domain\Entities\TipoProducto\" />
+    <Folder Include="Domain\Entities\AttributeValueTipoProducto\" />
+    <Folder Include="Domain\Exceptions\TipoProducto\" />
+    <Folder Include="Domain\Exceptions\AttributeValueTipoProducto\" />
+    <Folder Include="Domain\Entities\Stock\" />
+    <Folder Include="Domain\Exceptions\Stock\" />
+    <Folder Include="Domain\Repositories\TipoProducto\" />
+    <Folder Include="Domain\Repositories\AttributeValueTipoProducto\" />
+    <Folder Include="Domain\Repositories\Stock\" />
+    <Folder Include="DTO\TipoProducto\" />
+    <Folder Include="DTO\Stock\" />
+    <Folder Include="DTO\AttributeValueTipoProducto\" />
+    <Folder Include="Domain\Services\Stock\" />
+    <Folder Include="Domain\Services\TipoProducto\" />
+    <Folder Include="Domain\Services\AttributeValueTipoProducto\" />
+    <Folder Include="Infrastructure\Repositories\Stock\" />
+    <Folder Include="Infrastructure\Repositories\TipoProducto\" />
+    <Folder Include="Infrastructure\Repositories\AttributeValueTipoProducto\" />
   </ItemGroup>
 </Project>
