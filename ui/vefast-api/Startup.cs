@@ -25,6 +25,8 @@ using System;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Builder;
 using vefast_api.Extension.Swagger;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 namespace vefast_api
 {
@@ -63,6 +65,17 @@ namespace vefast_api
                 options.OperationFilter<ODataQueryOptionsFilter>();
             });
 
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+
+            //services.Configure<ForwardedHeadersOptions>(options =>
+            //{
+            //    options.KnownProxies.Add(IPAddress.Parse("93.188.167.3"));
+            //});
+
             services.AddMvcCore(options =>
             {
                 options.AllowEmptyInputInBodyModelBinding = true;
@@ -84,6 +97,8 @@ namespace vefast_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -91,13 +106,14 @@ namespace vefast_api
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1"));
-            //app.UseCors(builder =>
-            //{
-            //    builder.AllowAnyHeader()
-            //           .AllowAnyMethod()
-            //           .AllowAnyOrigin();
-            //    //.AllowCredentials();
-            //});
+           
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowAnyOrigin();
+                //.AllowCredentials();
+            });
 
             app.UseHttpsRedirection();
             app.UseRouting();            
