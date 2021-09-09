@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace vefast_src.Domain.Entities.Products
 {
+    using vefast_src.Domain.Entities.Stores;
+    using vefast_src.Domain.Entities.TipoProducto;
+    using vefast_src.Domain.Entities.Brands;
+    using vefast_src.Domain.Entities.Categories;
     public class Products : BaseEntity
     {
         [StringLength(255)]
@@ -18,10 +22,19 @@ namespace vefast_src.Domain.Entities.Products
         public int quantity { get; set; }
         [Column(TypeName = "Text")]
         public string description { get; set; }
-        public Guid attribute_value_id { get; set; }
+        [ForeignKey("TipoProducto")]
+        public Guid tipoProductoID { get; set; }
+        [ForeignKey("Brands")]
         public Guid brand_id { get; set; }
+        [ForeignKey("Categories")]
         public Guid category_id { get; set; }
-        public Guid store_id { get; set; }
+        [ForeignKey("Stores")]
+        public Guid store_id { get; set; }        
         public bool availability { get; set; }
+
+        public virtual TipoProducto TipoProducto { get; set; }
+        public virtual Brands Brands { get; set; }
+        public virtual Categories Categories { get; set; }
+        public virtual Stores Stores { get; set; }
     }
 }
