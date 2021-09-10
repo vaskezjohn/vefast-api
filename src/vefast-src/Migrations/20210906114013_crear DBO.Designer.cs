@@ -9,8 +9,8 @@ using vefast_src.Infrastructure;
 namespace vefast_src.Migrations
 {
     [DbContext(typeof(VefastDataContext))]
-    [Migration("20210818164907_CreateDataBaseV1")]
-    partial class CreateDataBaseV1
+    [Migration("20210906114013_crear DBO")]
+    partial class crearDBO
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace vefast_src.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.8");
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Attribute_value.Attribute_value", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValue.AttributeValue", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -327,7 +327,7 @@ namespace vefast_src.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Orders_item.Orders_item", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.OrdersItem.OrdersItem", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -434,7 +434,7 @@ namespace vefast_src.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("Company_id")
+                    b.Property<Guid>("CompanyID")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("InsertDate")
@@ -457,6 +457,8 @@ namespace vefast_src.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("CompanyID");
+
                     b.HasIndex("InsertUserID");
 
                     b.HasIndex("UpdateUserID");
@@ -464,39 +466,7 @@ namespace vefast_src.Migrations
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.User.User", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("email")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("firstname")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("lastname")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("phone")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("user")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("vefast_src.Domain.Entities.User_group.User_group", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.UserGroup.UserGroup", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -529,14 +499,46 @@ namespace vefast_src.Migrations
                     b.ToTable("UserGroup");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Attribute_value.Attribute_value", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.Users.Users", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("firstname")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("lastname")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("password")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("user")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValue.AttributeValue", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -548,12 +550,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Attributes.Attributes", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -565,12 +567,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Brands.Brands", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -582,12 +584,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Categories.Categories", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -599,12 +601,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Company.Company", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -616,12 +618,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Groups.Groups", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -633,12 +635,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Orders.Orders", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -648,14 +650,14 @@ namespace vefast_src.Migrations
                     b.Navigation("UpdateUser");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Orders_item.Orders_item", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.OrdersItem.OrdersItem", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -667,12 +669,12 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Products.Products", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -684,29 +686,37 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Stores.Stores", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Company.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Company");
 
                     b.Navigation("InsertUser");
 
                     b.Navigation("UpdateUser");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.User_group.User_group", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.UserGroup.UserGroup", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.User.User", "UpdateUser")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);

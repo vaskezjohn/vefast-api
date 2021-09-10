@@ -16,8 +16,11 @@ using vefast_src.Domain.Entities.Orders;
 using vefast_src.Domain.Entities.UserGroup;
 using vefast_src.Domain.Entities.Groups;
 using vefast_src.Domain.Entities.Users;
-
+using vefast_src.Domain.Entities.Stock;
+using vefast_src.Domain.Entities.TipoProducto;
+using vefast_src.Domain.Entities.AttributeValueTipoProducto;
 namespace vefast_src.Infrastructure
+
 {
 
     public class VefastDataContext : DbContext
@@ -36,6 +39,9 @@ namespace vefast_src.Infrastructure
         public DbSet<UserGroup> UserGroup { get; set; }
         public DbSet<Groups> Groups { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Stock> Stock { get; set; }
+        public DbSet<TipoProducto> TipoProducto { get; set; }
+        public DbSet<AttributeValueTipoProducto> AttributeValueTipoProducto { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

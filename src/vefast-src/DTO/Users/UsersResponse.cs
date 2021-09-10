@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vefast_src.Domain.Entities.Users
+namespace vefast_src.DTO.Users
 {
-	public class Users 
-	{
-		[Key]
+    public class UsersResponse
+    {
 		public Guid ID { get; set; }
 		public string user { get; set; }
 		public string password { get; set; }
@@ -22,6 +20,6 @@ namespace vefast_src.Domain.Entities.Users
 		public DateTime? tokenExpires { get; set; }
 		public string refreshToken { get; set; }
 		public bool changePassword { get; set; }
-		public bool downLogic { get; set; }		
+		public bool downLogic { get; set; }
 	}
 }

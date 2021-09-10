@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vefast_src.Infrastructure;
 
 namespace vefast_src.Migrations
 {
     [DbContext(typeof(VefastDataContext))]
-    partial class VefastDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210910122231_foreignkey")]
+    partial class foreignkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -633,10 +635,6 @@ namespace vefast_src.Migrations
 
                     b.HasIndex("UpdateUserID");
 
-                    b.HasIndex("group_id");
-
-                    b.HasIndex("user_id");
-
                     b.ToTable("UserGroup");
                 });
 
@@ -645,12 +643,6 @@ namespace vefast_src.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
-
-                    b.Property<bool>("changePassword")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("downLogic")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("email")
                         .HasColumnType("longtext");
@@ -669,15 +661,6 @@ namespace vefast_src.Migrations
 
                     b.Property<string>("phone")
                         .HasColumnType("longtext");
-
-                    b.Property<string>("refreshToken")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("token")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("tokenExpires")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("user")
                         .HasColumnType("longtext");
@@ -1047,25 +1030,9 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Groups.Groups", "Groups")
-                        .WithMany()
-                        .HasForeignKey("group_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Groups");
-
                     b.Navigation("InsertUser");
 
                     b.Navigation("UpdateUser");
-
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

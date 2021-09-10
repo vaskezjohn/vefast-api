@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace vefast_src.Migrations
 {
-    public partial class CreateDataBaseV1 : Migration
+    public partial class crearDBO : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -361,38 +361,6 @@ namespace vefast_src.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Stores",
-                columns: table => new
-                {
-                    ID = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    name = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    active = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Company_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    InsertDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    InsertUserID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateUserID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stores", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Stores_Users_InsertUserID",
-                        column: x => x.InsertUserID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Stores_Users_UpdateUserID",
-                        column: x => x.UpdateUserID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "UserGroup",
                 columns: table => new
                 {
@@ -415,6 +383,44 @@ namespace vefast_src.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserGroup_Users_UpdateUserID",
+                        column: x => x.UpdateUserID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Stores",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    active = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CompanyID = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    InsertDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    InsertUserID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdateUserID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stores", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Stores_Company_CompanyID",
+                        column: x => x.CompanyID,
+                        principalTable: "Company",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stores_Users_InsertUserID",
+                        column: x => x.InsertUserID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stores_Users_UpdateUserID",
                         column: x => x.UpdateUserID,
                         principalTable: "Users",
                         principalColumn: "ID",
@@ -513,6 +519,11 @@ namespace vefast_src.Migrations
                 column: "UpdateUserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Stores_CompanyID",
+                table: "Stores",
+                column: "CompanyID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Stores_InsertUserID",
                 table: "Stores",
                 column: "InsertUserID");
@@ -548,9 +559,6 @@ namespace vefast_src.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Company");
-
-            migrationBuilder.DropTable(
                 name: "Groups");
 
             migrationBuilder.DropTable(
@@ -567,6 +575,9 @@ namespace vefast_src.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserGroup");
+
+            migrationBuilder.DropTable(
+                name: "Company");
 
             migrationBuilder.DropTable(
                 name: "Users");

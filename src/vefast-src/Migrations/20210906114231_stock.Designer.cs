@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vefast_src.Infrastructure;
 
 namespace vefast_src.Migrations
 {
     [DbContext(typeof(VefastDataContext))]
-    partial class VefastDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210906114231_stock")]
+    partial class stock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,9 +23,6 @@ namespace vefast_src.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AttributeValueTipoProductoID")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("InsertDate")
@@ -44,12 +43,13 @@ namespace vefast_src.Migrations
                     b.Property<Guid>("attributes_id")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("products_id")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("value")
                         .HasColumnType("longtext");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AttributeValueTipoProductoID");
 
                     b.HasIndex("InsertUserID");
 
@@ -84,8 +84,7 @@ namespace vefast_src.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("IDAttributeValue")
-                        .IsUnique();
+                    b.HasIndex("IDAttributeValue");
 
                     b.HasIndex("IDTipoProducto");
 
@@ -100,9 +99,6 @@ namespace vefast_src.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AttributeValueID")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("InsertDate")
@@ -124,8 +120,6 @@ namespace vefast_src.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AttributeValueID");
 
                     b.HasIndex("InsertUserID");
 
@@ -167,8 +161,6 @@ namespace vefast_src.Migrations
 
                     b.HasIndex("UpdateUserID");
 
-                    b.HasIndex("products_id");
-
                     b.ToTable("Brands");
                 });
 
@@ -204,8 +196,6 @@ namespace vefast_src.Migrations
                     b.HasIndex("InsertUserID");
 
                     b.HasIndex("UpdateUserID");
-
-                    b.HasIndex("products_id");
 
                     b.ToTable("Categories");
                 });
@@ -320,9 +310,6 @@ namespace vefast_src.Migrations
                     b.Property<Guid?>("UpdateUserID")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("UsersID")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("bill_no")
                         .HasColumnType("longtext");
 
@@ -374,10 +361,6 @@ namespace vefast_src.Migrations
 
                     b.HasIndex("UpdateUserID");
 
-                    b.HasIndex("UsersID");
-
-                    b.HasIndex("orders_item_id");
-
                     b.ToTable("Orders");
                 });
 
@@ -420,8 +403,6 @@ namespace vefast_src.Migrations
 
                     b.HasIndex("UpdateUserID");
 
-                    b.HasIndex("product_id");
-
                     b.ToTable("Ordersitem");
                 });
 
@@ -441,6 +422,9 @@ namespace vefast_src.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<Guid?>("UpdateUserID")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("attribute_value_id")
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("availability")
@@ -472,22 +456,11 @@ namespace vefast_src.Migrations
                     b.Property<Guid>("store_id")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("tipoProductoID")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("ID");
 
                     b.HasIndex("InsertUserID");
 
                     b.HasIndex("UpdateUserID");
-
-                    b.HasIndex("brand_id");
-
-                    b.HasIndex("category_id");
-
-                    b.HasIndex("store_id");
-
-                    b.HasIndex("tipoProductoID");
 
                     b.ToTable("Products");
                 });
@@ -633,10 +606,6 @@ namespace vefast_src.Migrations
 
                     b.HasIndex("UpdateUserID");
 
-                    b.HasIndex("group_id");
-
-                    b.HasIndex("user_id");
-
                     b.ToTable("UserGroup");
                 });
 
@@ -645,12 +614,6 @@ namespace vefast_src.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
-
-                    b.Property<bool>("changePassword")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("downLogic")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("email")
                         .HasColumnType("longtext");
@@ -670,15 +633,6 @@ namespace vefast_src.Migrations
                     b.Property<string>("phone")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("refreshToken")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("token")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("tokenExpires")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("user")
                         .HasColumnType("longtext");
 
@@ -689,12 +643,6 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValue.AttributeValue", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.AttributeValueTipoProducto.AttributeValueTipoProducto", "AttributeValueTipoProducto")
-                        .WithMany()
-                        .HasForeignKey("AttributeValueTipoProductoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
@@ -705,8 +653,6 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("AttributeValueTipoProducto");
-
                     b.Navigation("InsertUser");
 
                     b.Navigation("UpdateUser");
@@ -715,8 +661,8 @@ namespace vefast_src.Migrations
             modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValueTipoProducto.AttributeValueTipoProducto", b =>
                 {
                     b.HasOne("vefast_src.Domain.Entities.AttributeValue.AttributeValue", "AttributeValue")
-                        .WithOne()
-                        .HasForeignKey("vefast_src.Domain.Entities.AttributeValueTipoProducto.AttributeValueTipoProducto", "IDAttributeValue")
+                        .WithMany()
+                        .HasForeignKey("IDAttributeValue")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -747,12 +693,6 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Attributes.Attributes", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.AttributeValue.AttributeValue", "AttributeValue")
-                        .WithMany()
-                        .HasForeignKey("AttributeValueID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
                         .HasForeignKey("InsertUserID")
@@ -762,8 +702,6 @@ namespace vefast_src.Migrations
                         .WithMany()
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("AttributeValue");
 
                     b.Navigation("InsertUser");
 
@@ -782,15 +720,7 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Products.Products", "Products")
-                        .WithMany()
-                        .HasForeignKey("products_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("InsertUser");
-
-                    b.Navigation("Products");
 
                     b.Navigation("UpdateUser");
                 });
@@ -807,15 +737,7 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Products.Products", "Products")
-                        .WithMany()
-                        .HasForeignKey("products_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("InsertUser");
-
-                    b.Navigation("Products");
 
                     b.Navigation("UpdateUser");
                 });
@@ -866,24 +788,9 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("UsersID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.OrdersItem.OrdersItem", "OrdersItem")
-                        .WithMany()
-                        .HasForeignKey("orders_item_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("InsertUser");
 
-                    b.Navigation("OrdersItem");
-
                     b.Navigation("UpdateUser");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.OrdersItem.OrdersItem", b =>
@@ -898,15 +805,7 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Products.Products", "Products")
-                        .WithMany()
-                        .HasForeignKey("product_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("InsertUser");
-
-                    b.Navigation("Products");
 
                     b.Navigation("UpdateUser");
                 });
@@ -923,39 +822,7 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Brands.Brands", "Brands")
-                        .WithMany()
-                        .HasForeignKey("brand_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vefast_src.Domain.Entities.Categories.Categories", "Categories")
-                        .WithMany()
-                        .HasForeignKey("category_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vefast_src.Domain.Entities.Stores.Stores", "Stores")
-                        .WithMany()
-                        .HasForeignKey("store_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vefast_src.Domain.Entities.TipoProducto.TipoProducto", "TipoProducto")
-                        .WithMany()
-                        .HasForeignKey("tipoProductoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Brands");
-
-                    b.Navigation("Categories");
-
                     b.Navigation("InsertUser");
-
-                    b.Navigation("Stores");
-
-                    b.Navigation("TipoProducto");
 
                     b.Navigation("UpdateUser");
                 });
@@ -1047,25 +914,9 @@ namespace vefast_src.Migrations
                         .HasForeignKey("UpdateUserID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Groups.Groups", "Groups")
-                        .WithMany()
-                        .HasForeignKey("group_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Groups");
-
                     b.Navigation("InsertUser");
 
                     b.Navigation("UpdateUser");
-
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

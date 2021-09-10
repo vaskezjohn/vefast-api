@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vefast_src.Infrastructure;
 
 namespace vefast_src.Migrations
 {
     [DbContext(typeof(VefastDataContext))]
-    partial class VefastDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210910144258_ForegnKey 2")]
+    partial class ForegnKey2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
