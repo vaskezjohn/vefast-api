@@ -105,7 +105,7 @@ namespace vefast_api
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("../swagger/v1/swagger.json", "vefast_api v1"));
            
             app.UseCors(builder =>
             {
@@ -119,7 +119,7 @@ namespace vefast_api
             app.UseRouting();            
             app.UseAuthorization();
 
-            app.UseRequestLocalization();
+            //app.UseRequestLocalization();
 
             app.UseMvc(routeBuilder =>
             {
@@ -128,10 +128,10 @@ namespace vefast_api
                 routeBuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
             });
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
 
         IEdmModel GetEdmModel()
