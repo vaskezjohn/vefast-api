@@ -1,6 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace vefast_src.Domain.Entities.Orders
 {
+    using vefast_src.Domain.Entities.OrdersItem;
+    using vefast_src.Domain.Entities.Users;
     public class Orders : BaseEntity
     {
         public string bill_no { get; set; } /*AGREGAR DESCRIPCION*/
@@ -16,7 +20,12 @@ namespace vefast_src.Domain.Entities.Orders
         public double net_amount { get; set; } /*Importe neto*/
         public double discount { get; set; }/*Descuento*/
         public int paid_status { get; set; } /*Estado del pago*/
+        [ForeignKey("USers")]
         public Guid users_id { get; set; }
+        [ForeignKey("OrdersItem")]
         public Guid orders_item_id { get; set; }
+
+        public virtual Users Users { get; set; }
+        public virtual OrdersItem OrdersItem { get; set; }
     }
 }
