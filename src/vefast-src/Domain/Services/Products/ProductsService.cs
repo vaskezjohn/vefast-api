@@ -75,7 +75,7 @@ namespace vefast_src.Domain.Services.Products
                 throw new ProductsNotFoundException("Empresa no encontrada.");
             }
 
-            products.attribute_value_id = objRequest.attribute_value_id;
+            //products.attribute_value_id = objRequest.attribute_value_id;
             products.description = objRequest.description;
             products.availability = objRequest.availability;
             products.brand_id = objRequest.brand_id;

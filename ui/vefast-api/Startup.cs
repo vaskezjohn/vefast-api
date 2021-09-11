@@ -27,6 +27,7 @@ using Microsoft.AspNet.OData.Builder;
 using vefast_api.Extension.Swagger;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
+using System.Collections.Generic;
 
 namespace vefast_api
 {
@@ -42,7 +43,8 @@ namespace vefast_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(cfg => {
+            services.AddAutoMapper(cfg =>
+            {
                 cfg.AddExpressionMapping();
             });
 
@@ -50,7 +52,7 @@ namespace vefast_api
 
             services.AddMvc()
                 .AddJsonOptions(opt => opt.JsonSerializerOptions.MaxDepth = 2)
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);          
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddService();
             services.AddInfrastructure(Configuration);
@@ -97,6 +99,8 @@ namespace vefast_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var basePath = "/vefast-api";
+
             app.UseForwardedHeaders();
 
             if (env.IsDevelopment())
@@ -104,9 +108,20 @@ namespace vefast_api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("../swagger/v1/swagger.json", "vefast_api v1"));
-           
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "swagger/{documentName}/swagger.json";
+                c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                {
+                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" } };
+                });
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+               c.SwaggerEndpoint("v1/swagger.json", "vefast_api v1");
+            });
+
             app.UseCors(builder =>
             {
                 builder.AllowAnyHeader()
@@ -116,22 +131,26 @@ namespace vefast_api
             });
 
             app.UseHttpsRedirection();
-            app.UseRouting();            
+            app.UseRouting();
             app.UseAuthorization();
 
             //app.UseRequestLocalization();
 
             app.UseMvc(routeBuilder =>
             {
+                routeBuilder.MapRoute(
+                    name: "default",
+                    template: "vefast-api/{controller=Home}/{action=Index}");
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().OrderBy().Filter().SkipToken().MaxTop(null).Count();
                 routeBuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
             });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+
         }
 
         IEdmModel GetEdmModel()
@@ -142,6 +161,6 @@ namespace vefast_api
             return odataBuilder.GetEdmModel();
         }
 
-      
+
     }
 }

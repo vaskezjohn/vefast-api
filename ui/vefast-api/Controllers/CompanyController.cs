@@ -29,7 +29,7 @@ namespace vefast_api.Controllers
 
         [HttpGet]
         [EnableQuery()]
-        [Route("odata/[controller]")]
+        [Route("/odata/[controller]")]
         public IQueryable<Company> Get()
         {
             return _companyRepository.GetAll();

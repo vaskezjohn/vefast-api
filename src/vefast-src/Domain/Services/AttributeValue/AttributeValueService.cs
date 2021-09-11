@@ -91,7 +91,7 @@ namespace vefast_src.Domain.Services.AttributeValue
 
             attribute_value.value = objRequest.value;
             attribute_value.attribute_parent_id = objRequest.attribute_parent_id;
-            attribute_value.products_id = objRequest.products_id;
+            //attribute_value.products_id = objRequest.products_id;
             attribute_value.attributes_id = objRequest.attributes_id;
             
 
