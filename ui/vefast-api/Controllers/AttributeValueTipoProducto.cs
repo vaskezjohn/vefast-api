@@ -28,7 +28,7 @@ namespace vefast_api.Controllers
 
         [HttpGet]
         [EnableQuery()]
-        [Route("odata/[controller]")]
+        [Route("/odata/[controller]")]
         public IQueryable<AttributeValueTipoProducto> Get()
         {
             return _AttributeValueTipoProductoRepository.GetAll();
