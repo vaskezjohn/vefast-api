@@ -4,5 +4,7 @@
 
     public interface IUsersRepository : IGenericRepository<Users>
     {
+        Users CheckUserPassword(string user, string pass);
+
     }
 }

@@ -31,6 +31,8 @@ using vefast_src.Infrastructure.Repositories.TipoProducto;
 using vefast_src.Domain.Repositories.TipoProducto;
 using vefast_src.Infrastructure.Repositories.AttributeValueTipoProducto;
 using vefast_src.Domain.Repositories.AttributeValueTipoProducto;
+using vefast_src.Infrastructure.Repositories.Users;
+using vefast_src.Domain.Repositories.Users;
 
 
 namespace vefast_api.Extension.DependencyInjection
@@ -65,7 +67,7 @@ namespace vefast_api.Extension.DependencyInjection
             services.AddTransient<IStockRepository, StockRepositoryEF>();
             services.AddTransient<ITipoProductoRepository, TipoProductoRepositoryEF>();
             services.AddTransient<IAttributeValueTipoProductoRepository, AttributeValueTipoProductoRepositoryEF>();
-
+            services.AddTransient<IUsersRepository, UsersRepositoryEF>();
 
             return services;
         }

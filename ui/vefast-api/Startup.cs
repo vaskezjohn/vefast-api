@@ -25,6 +25,7 @@ using System;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Builder;
 using vefast_api.Extension.Swagger;
+using System.Collections.Generic;
 
 namespace vefast_api
 {
@@ -90,7 +91,23 @@ namespace vefast_api
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("../swagger/v1/swagger.json", "vefast_api v1"));
+            var basePath = "/vefast-api";
+
+
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "swagger/{documentName}/swagger.json";
+                /* c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                 {
+                     swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" } };
+                 });*/          
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "vefast_api v1");
+            });
+
             //app.UseCors(builder =>
             //{
             //    builder.AllowAnyHeader()

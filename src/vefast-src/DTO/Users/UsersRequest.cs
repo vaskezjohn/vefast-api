@@ -22,4 +22,11 @@ namespace vefast_src.DTO.Users
 		public bool changePassword { get; set; }
 		public bool downLogic { get; set; }
 	}
+
+	public class UsersLoginRequest
+	{		
+		public string user { get; set; }
+		public string password { get; set; }		
+	}
+	
 }
