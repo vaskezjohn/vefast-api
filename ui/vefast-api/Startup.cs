@@ -1,7 +1,6 @@
 using AutoMapper.Extensions.ExpressionMapping;
 using System.Linq;
 using vefast_src.AutoMapper.Profiles;
-using vefast_src.Domain.Entities.Company;
 using vefast_api.Extension.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,12 +21,16 @@ using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.OData;
 //using Microsoft.AspNetCore.OData.Routing.Conventions;
 using System;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNet.OData.Builder;
+using Microsoft.OData;
 using vefast_api.Extension.Swagger;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.OData;
+using Microsoft.OData.ModelBuilder;
+using vefast_src.Domain.Entities.Categories;
+using Microsoft.AspNetCore.OData.Routing.Conventions;
+using vefast_src.Domain.Entities.Companes;
 
 namespace vefast_api
 {
@@ -43,6 +46,28 @@ namespace vefast_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //services.AddControllers(mvcOptions =>
+            //    mvcOptions.EnableEndpointRouting = false);
+
+            //services.AddControllers().AddOData(options => options.Select().Expand().OrderBy().Filter().SkipToken().SetMaxTop(null).Count());
+
+            //services.AddControllers().AddOData(options =>
+            //{
+            //    options.EnableQueryFeatures();
+            //    var routeOptions = options.AddRouteComponents(GetEdmModel()).Select().Filter().Count().Expand().RouteOptions;
+
+            //    routeOptions.EnableQualifiedOperationCall =
+            //    routeOptions.EnableKeyAsSegment =
+            //    routeOptions.EnableKeyInParenthesis = true;
+            //});
+            //services.AddControllers().AddOData(opt => { 
+            //    opt.Conventions.Remove(opt.Conventions.OfType<MetadataRoutingConvention>().First()); opt.AddRouteComponents(GetEdmModel()).Select().Filter().Expand().Count().OrderBy().SetMaxTop(100); });
+
+
+            services.AddControllers().AddOData(opt => opt.Select().Filter().Expand().Count().OrderBy().SetMaxTop(100)
+                                            .AddRouteComponents("odata", GetEdmModel()));
+
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddExpressionMapping();
@@ -57,14 +82,12 @@ namespace vefast_api
             services.AddService();
             services.AddInfrastructure(Configuration);
 
-            services.AddControllers(mvcOptions =>
-                mvcOptions.EnableEndpointRouting = false);
-            services.AddOData();
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "VEFAST-API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "VeFaSt-Api", Version = "v1" });
                 options.OperationFilter<ODataQueryOptionsFilter>();
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
             services.Configure<ForwardedHeadersOptions>(options =>
@@ -106,20 +129,25 @@ namespace vefast_api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+            }
+            else
+            {
+                app.UseSwagger(c =>
+                {
+                    c.RouteTemplate = "swagger/{documentName}/swagger.json";
+                    c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                    {
+                        swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" }};
+                    });
+                });
             }
 
-            app.UseSwagger(c =>
-            {
-                c.RouteTemplate = "swagger/{documentName}/swagger.json";
-                c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
-                {
-                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" } };
-                });
-            });
+           
 
             app.UseSwaggerUI(c =>
             {
-               c.SwaggerEndpoint("v1/swagger.json", "vefast_api v1");
+               c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1");
             });
 
             app.UseCors(builder =>
@@ -136,29 +164,35 @@ namespace vefast_api
 
             //app.UseRequestLocalization();
 
-            app.UseMvc(routeBuilder =>
-            {
-                routeBuilder.MapRoute(
-                    name: "default",
-                    template: "vefast-api/{controller=Home}/{action=Index}");
-                routeBuilder.EnableDependencyInjection();
-                routeBuilder.Expand().Select().OrderBy().Filter().SkipToken().MaxTop(null).Count();
-                routeBuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
-            });
 
-            //app.UseEndpoints(endpoints =>
+
+            //app.UseMvc(routeBuilder =>
             //{
-            //    endpoints.MapControllers();
+            //    routeBuilder.MapRoute(
+            //        name: "default",
+            //        template: "vefast-api/{controller=Home}/{action=Index}");
+            //    routeBuilder.EnableDependencyInjection();
+            //    routeBuilder.Expand().Select().OrderBy().Filter().SkipToken().MaxTop(null).Count();
+            //    routeBuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
             //});
+
+            //app.MapControllers();
+            //app.MapControllers();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
         }
 
-        IEdmModel GetEdmModel()
+        static IEdmModel GetEdmModel()
         {
-            var odataBuilder = new ODataConventionModelBuilder();
-            odataBuilder.EntitySet<Company>("Company");
-
-            return odataBuilder.GetEdmModel();
+            var builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Companes>("Company");
+            builder.EntitySet<Categories>("CategoriesOdata");
+            //categories.EntityType.Ignore(c => c.name);
+            return builder.GetEdmModel();
         }
 
 

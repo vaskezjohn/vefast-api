@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace vefast_src.Domain.Entities.Products
+﻿namespace vefast_src.Domain.Entities.Products
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using vefast_src.Domain.Entities.Stores;
-    using vefast_src.Domain.Entities.TipoProducto;
     using vefast_src.Domain.Entities.Brands;
     using vefast_src.Domain.Entities.Categories;
+    using vefast_src.Domain.Entities.ProductsType;
+
     public class Products : BaseEntity
     {
         [StringLength(255)]
@@ -32,7 +28,7 @@ namespace vefast_src.Domain.Entities.Products
         public Guid store_id { get; set; }        
         public bool availability { get; set; }
 
-        public virtual TipoProducto TipoProducto { get; set; }
+        public virtual ProductsType TipoProducto { get; set; }
         public virtual Brands Brands { get; set; }
         public virtual Categories Categories { get; set; }
         public virtual Stores Stores { get; set; }

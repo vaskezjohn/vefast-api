@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNet.OData;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.UserGroup;
+using vefast_src.Domain.Entities.UsersGroups;
 using vefast_src.Domain.Repositories.UserGroup;
 using vefast_src.Domain.Services.UserGroup;
 using vefast_src.DTO.UserGroup;
@@ -27,7 +27,7 @@ namespace vefast_api.Controllers
         [HttpGet]
         [EnableQuery()]
         [Route("/odata/[controller]")]
-        public IQueryable<UserGroup> Get()
+        public IQueryable<UsersGroups> Get()
         {
             return _userGroupRepository.GetAll();
         }

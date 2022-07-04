@@ -90,8 +90,7 @@ namespace vefast_src.Domain.Services.Categories
             }
 
             categories.name = objRequest.name;
-            categories.active = objRequest.active;
-            categories.products_id = objRequest.products_id;            
+            categories.active = objRequest.active;        
 
             _categoriesRepository.Update(categories);
             await _categoriesRepository.SaveAsync();

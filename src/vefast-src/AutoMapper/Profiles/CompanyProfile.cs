@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using vefast_src.Domain.Entities.Company;
+using vefast_src.Domain.Entities.Companes;
 using vefast_src.DTO.Company;
 
 namespace vefast_src.AutoMapper.Profiles
@@ -8,10 +8,10 @@ namespace vefast_src.AutoMapper.Profiles
     {
         public CompanyProfile()
         {
-            CreateMap<Company, CompanyResponse>()
+            CreateMap<Companes, CompanyResponse>()
                 .ReverseMap()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<Company, CompanyRequest>()
+            CreateMap<Companes, CompanyRequest>()
                     .ReverseMap()
                     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }

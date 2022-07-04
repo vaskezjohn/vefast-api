@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.OData;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 //using Microsoft.AspNetCore.OData.Query;
 using System;
 using System.Collections.Generic;
@@ -27,13 +28,13 @@ namespace vefast_api.Controllers
             _categoriesRepository = categoriesRepository;
         }
 
-        [HttpGet]
-        [EnableQuery()]
-        [Route("/odata/[controller]")]
-        public IQueryable<Categories> Get()
-        {
-            return _categoriesRepository.GetAll();
-        }
+        //[HttpGet]
+        //[EnableQuery()]
+        //[Route("/odata/[controller]")]
+        //public IQueryable<Categories> Get()
+        //{
+        //    return _categoriesRepository.GetAll();
+        //}
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoriesByIdAsync([FromRoute] string id)

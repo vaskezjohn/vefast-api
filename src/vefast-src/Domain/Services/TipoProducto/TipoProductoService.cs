@@ -5,6 +5,7 @@ using vefast_src.DTO.TipoProducto;
 using AutoMapper;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using vefast_src.Domain.Entities.ProductsType;
 
 namespace vefast_src.Domain.Services.TipoProducto
 {
@@ -26,7 +27,7 @@ namespace vefast_src.Domain.Services.TipoProducto
 
         public async Task<TipoProductoResponse> CreateTipoProductoAsync(TipoProductoRequest objRequest)
         {
-            var tipoProducto = _mapper.Map<Entities.TipoProducto.TipoProducto>(objRequest);
+            var tipoProducto = _mapper.Map<ProductsType>(objRequest);
             _tipoProductoRepository.Add(tipoProducto);
 
             try
@@ -75,8 +76,7 @@ namespace vefast_src.Domain.Services.TipoProducto
             }
             /*Revisar*/
             tipoProducto.active = objRequest.active;
-            tipoProducto.ProductsID = objRequest.ProductsID;
-            tipoProducto.Products = objRequest.Products;
+            //tipoProducto.Products = objRequest.Products;
             tipoProducto.tipoProduct = objRequest.tipoProduct;
             /**/ 
             

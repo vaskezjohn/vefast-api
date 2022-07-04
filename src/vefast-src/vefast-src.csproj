@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>vefast_src</RootNamespace>
   </PropertyGroup>
 
@@ -127,7 +127,6 @@
     <Folder Include="Infrastructure\Repositories\Attributes\" />
     <Folder Include="Infrastructure\Repositories\Orders\" />
     <Folder Include="Infrastructure\Repositories\Groups\" />
-    <Folder Include="Domain\Entities\TipoProducto\" />
     <Folder Include="Domain\Entities\AttributeValueTipoProducto\" />
     <Folder Include="Domain\Exceptions\TipoProducto\" />
     <Folder Include="Domain\Exceptions\AttributeValueTipoProducto\" />

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Company;
 using vefast_src.Domain.Entities.Products;
 using vefast_src.Domain.Entities.Stores;
 using vefast_src.Domain.Entities.Brands;
@@ -13,9 +12,10 @@ using vefast_src.Domain.Entities.AttributeValue;
 using vefast_src.Domain.Entities.Attributes;
 using vefast_src.Domain.Entities.OrdersItem;
 using vefast_src.Domain.Entities.Orders;
-using vefast_src.Domain.Entities.UserGroup;
 using vefast_src.Domain.Entities.Groups;
 using vefast_src.Domain.Entities.Users;
+using vefast_src.Domain.Entities.UsersGroups;
+using vefast_src.Domain.Entities.Companes;
 
 namespace vefast_src.Infrastructure
 {
@@ -24,7 +24,7 @@ namespace vefast_src.Infrastructure
     {
         public VefastDataContext(DbContextOptions<VefastDataContext> options) : base(options) { }
 
-        public DbSet<Company> Company { get; set; }
+        public DbSet<Companes> Company { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<Stores> Stores { get; set; }
         public DbSet<Brands> Brands { get; set; }
@@ -33,7 +33,7 @@ namespace vefast_src.Infrastructure
         public DbSet<Attributes> Attributes { get; set; }
         public DbSet<OrdersItem> Ordersitem { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<UserGroup> UserGroup { get; set; }
+        public DbSet<UsersGroups> UserGroup { get; set; }
         public DbSet<Groups> Groups { get; set; }
         public DbSet<Users> Users { get; set; }
 

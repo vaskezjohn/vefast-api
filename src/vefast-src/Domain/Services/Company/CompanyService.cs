@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using vefast_src.Domain.Entities.Companes;
 using vefast_src.Domain.Exceptions.Company;
 using vefast_src.Domain.Repositories.Company;
 using vefast_src.DTO.Company;
@@ -41,7 +42,7 @@ namespace vefast_src.Domain.Services.Company
 
         public async Task<CompanyResponse> CreateCompanyAsync(CompanyRequest objRequest)
         {
-            var company = _mapper.Map<Entities.Company.Company>(objRequest);
+            var company = _mapper.Map<Companes>(objRequest);
             _companyRepository.Add(company);
 
             try

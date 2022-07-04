@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNet.OData;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 //using Microsoft.AspNetCore.OData.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Company;
+using vefast_src.Domain.Entities.Companes;
 using vefast_src.Domain.Repositories.Company;
 using vefast_src.Domain.Services.Company;
 using vefast_src.DTO.Company;
@@ -30,7 +31,7 @@ namespace vefast_api.Controllers
         [HttpGet]
         [EnableQuery()]
         [Route("/odata/[controller]")]
-        public IQueryable<Company> Get()
+        public IQueryable<Companes> Get()
         {
             return _companyRepository.GetAll();
         }

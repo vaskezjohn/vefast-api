@@ -2,8 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace vefast_src.DTO.AttributeValueTipoProducto
 {
-    using vefast_src.Domain.Entities.TipoProducto;
     using vefast_src.Domain.Entities.AttributeValue;
+    using vefast_src.Domain.Entities.ProductsType;
+
     public class AttributeValueTipoProductoRequest
     {
         [ForeignKey("AttributeValue")]
@@ -12,6 +13,6 @@ namespace vefast_src.DTO.AttributeValueTipoProducto
 
         [ForeignKey("TipoProducto")]
         public Guid IDTipoProducto { get; set; }
-        public virtual TipoProducto TipoProducto { get; set; }
+        public virtual ProductsType TipoProducto { get; set; }
     }
 }

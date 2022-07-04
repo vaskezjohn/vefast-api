@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using vefast_src.Domain.Entities.UserGroup;
+using vefast_src.Domain.Entities.UsersGroups;
 using vefast_src.DTO.UserGroup;
 
 namespace vefast_src.AutoMapper.Profiles
@@ -8,10 +8,10 @@ namespace vefast_src.AutoMapper.Profiles
     {
         public User_groupProfile()
         {
-            CreateMap<UserGroup, UserGroupResponse>()
+            CreateMap<UsersGroups, UserGroupResponse>()
                 .ReverseMap()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<UserGroup, UserGroupRequest>()
+            CreateMap<UsersGroups, UserGroupRequest>()
                     .ReverseMap()
                     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }

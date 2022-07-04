@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNet.OData;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.TipoProducto;
 using vefast_src.Domain.Repositories.TipoProducto;
 using vefast_src.Domain.Services.TipoProducto;
 using vefast_src.DTO.TipoProducto;
+using Microsoft.AspNetCore.OData.Query;
+using vefast_src.Domain.Entities.ProductsType;
+
 namespace vefast_api.Controllers
 {
     //[Authorize]
@@ -28,7 +30,7 @@ namespace vefast_api.Controllers
         [HttpGet]
         [EnableQuery()]
         [Route("/odata/[controller]")]
-        public IQueryable<TipoProducto> Get()
+        public IQueryable<ProductsType> Get()
         {
             return _TipoProductoRepository.GetAll();
         }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>vefast_api</RootNamespace>
     <UserSecretsId>9d906c16-1768-4138-b65f-4cb3b0c37156</UserSecretsId>
   </PropertyGroup>
@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">

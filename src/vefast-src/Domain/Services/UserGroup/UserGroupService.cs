@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using vefast_src.Domain.Entities.UsersGroups;
 using vefast_src.Domain.Exceptions.UserGroup;
 using vefast_src.Domain.Repositories.UserGroup;
 using vefast_src.DTO.UserGroup;
@@ -41,7 +42,7 @@ namespace vefast_src.Domain.Services.UserGroup
 
         public async Task<UserGroupResponse> CreateUserGroupAsync(UserGroupRequest objRequest)
         {
-            var user_group = _mapper.Map<Entities.UserGroup.UserGroup>(objRequest);
+            var user_group = _mapper.Map<UsersGroups>(objRequest);
             _user_groupRepository.Add(user_group);
 
             try

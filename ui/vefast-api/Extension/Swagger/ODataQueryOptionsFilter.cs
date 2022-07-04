@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Query;
+﻿using Microsoft.AspNetCore.OData.Query;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;

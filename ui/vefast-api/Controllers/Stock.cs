@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.OData;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +9,8 @@ using vefast_src.Domain.Entities.Stock;
 using vefast_src.Domain.Repositories.Stock;
 using vefast_src.Domain.Services.Stock;
 using vefast_src.DTO.Stock;
+using Microsoft.AspNetCore.OData.Query;
+
 
 namespace vefast_api.Controllers
 {

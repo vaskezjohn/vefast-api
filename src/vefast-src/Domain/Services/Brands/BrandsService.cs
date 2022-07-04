@@ -90,7 +90,6 @@ namespace vefast_src.Domain.Services.Brands
 
             brands.name = objRequest.name;
             brands.active = objRequest.active;
-            brands.products_id = objRequest.products_id;
 
             _brandsRepository.Update(brands);
             await _brandsRepository.SaveAsync();
