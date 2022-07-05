@@ -1,21 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-
-namespace vefast_src.Domain.Entities.Stores
-
+﻿namespace vefast_src.Domain.Entities.Stores
 {
-    using vefast_src.Domain.Entities.Companes;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using vefast_src.Domain.Entities.Companies;
+
     public class Stores : BaseEntity
     {
-        public string name { get; set; }
-        public bool active { get; set; }
+        public string Name { get; set; }
+        public bool Active { get; set; }
 
-        /*ForeignKey*/
-        [ForeignKey("Company")]/*Notacion*/
-        public Guid CompanyID { get; set; }
-        /* variable virtual de clase Company para formar el FK*/
-        public virtual Companes Company { get; set; }
+        [ForeignKey("Companies")]
+        public Guid ID_Company { get; set; }
+        public virtual Companies Company { get; set; }
     }
 }

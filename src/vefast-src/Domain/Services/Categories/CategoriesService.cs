@@ -89,8 +89,8 @@ namespace vefast_src.Domain.Services.Categories
                 throw new CategoriesNotFoundException("Categoria no encontrada.");
             }
 
-            categories.name = objRequest.name;
-            categories.active = objRequest.active;        
+            categories.Name = objRequest.name;
+            categories.Active = objRequest.active;        
 
             _categoriesRepository.Update(categories);
             await _categoriesRepository.SaveAsync();

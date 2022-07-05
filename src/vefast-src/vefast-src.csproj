@@ -127,22 +127,11 @@
     <Folder Include="Infrastructure\Repositories\Attributes\" />
     <Folder Include="Infrastructure\Repositories\Orders\" />
     <Folder Include="Infrastructure\Repositories\Groups\" />
-    <Folder Include="Domain\Entities\AttributeValueTipoProducto\" />
-    <Folder Include="Domain\Exceptions\TipoProducto\" />
-    <Folder Include="Domain\Exceptions\AttributeValueTipoProducto\" />
     <Folder Include="Domain\Entities\Stock\" />
     <Folder Include="Domain\Exceptions\Stock\" />
-    <Folder Include="Domain\Repositories\TipoProducto\" />
-    <Folder Include="Domain\Repositories\AttributeValueTipoProducto\" />
     <Folder Include="Domain\Repositories\Stock\" />
-    <Folder Include="DTO\TipoProducto\" />
     <Folder Include="DTO\Stock\" />
-    <Folder Include="DTO\AttributeValueTipoProducto\" />
     <Folder Include="Domain\Services\Stock\" />
-    <Folder Include="Domain\Services\TipoProducto\" />
-    <Folder Include="Domain\Services\AttributeValueTipoProducto\" />
     <Folder Include="Infrastructure\Repositories\Stock\" />
-    <Folder Include="Infrastructure\Repositories\TipoProducto\" />
-    <Folder Include="Infrastructure\Repositories\AttributeValueTipoProducto\" />
   </ItemGroup>
 </Project>

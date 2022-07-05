@@ -89,8 +89,8 @@ namespace vefast_src.Domain.Services.Groups
                 throw new GroupsNotFoundException("Grupo no encontrado.");
             }
 
-            groups.group_name = objRequest.group_name;
-            groups.permission = objRequest.permission;
+            groups.GroupName = objRequest.group_name;
+            groups.Permission = objRequest.permission;
  
 
             _groupsRepository.Update(groups);

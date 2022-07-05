@@ -88,8 +88,8 @@ namespace vefast_src.Domain.Services.Brands
                 throw new BrandsNotFoundException("Marca no encontrada.");
             }
 
-            brands.name = objRequest.name;
-            brands.active = objRequest.active;
+            brands.Name = objRequest.name;
+            brands.Active = objRequest.active;
 
             _brandsRepository.Update(brands);
             await _brandsRepository.SaveAsync();

@@ -74,8 +74,8 @@ namespace vefast_src.Domain.Services.Stock
                 throw new StockNotFoundException("Stock no encontrado.");
             }
 
-            stock.IDProducts = objRequest.IDProducts;
-            stock.cantidad = objRequest.cantidad;
+            stock.ID_Product = objRequest.IDProducts;
+            stock.Cantidad = objRequest.cantidad;
             
 
             _stockRepository.Update(stock);

@@ -30,7 +30,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.OData.ModelBuilder;
 using vefast_src.Domain.Entities.Categories;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
-using vefast_src.Domain.Entities.Companes;
+using vefast_src.Domain.Entities.Companies;
 
 namespace vefast_api
 {
@@ -73,7 +73,7 @@ namespace vefast_api
                 cfg.AddExpressionMapping();
             });
 
-            services.AddAutoMapper(typeof(CompanyProfile));
+            services.AddAutoMapper(typeof(CompaniesProfile));
 
             services.AddMvc()
                 .AddJsonOptions(opt => opt.JsonSerializerOptions.MaxDepth = 2)
@@ -189,7 +189,7 @@ namespace vefast_api
         static IEdmModel GetEdmModel()
         {
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Companes>("Company");
+            builder.EntitySet<Companies>("Company");
             builder.EntitySet<Categories>("CategoriesOdata");
             //categories.EntityType.Ignore(c => c.name);
             return builder.GetEdmModel();

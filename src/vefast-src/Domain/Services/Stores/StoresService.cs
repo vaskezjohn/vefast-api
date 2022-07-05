@@ -75,8 +75,8 @@ namespace vefast_src.Domain.Services.Stores
             }
 
             stores.ID = objRequest.Company_id;
-            stores.name = objRequest.name;
-            stores.active = objRequest.active;
+            stores.Name = objRequest.name;
+            stores.Active = objRequest.active;
             
             _storesRepository.Update(stores);
             await _storesRepository.SaveAsync();

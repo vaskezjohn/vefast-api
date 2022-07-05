@@ -1,15 +1,14 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace vefast_src.Domain.Entities.Attributes
+﻿namespace vefast_src.Domain.Entities.Attributes
 {
-    using vefast_src.Domain.Entities.AttributeValue;
+    using System;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
+    using vefast_src.Domain.Entities.AttributeValues;
+
     public class Attributes : BaseEntity
     {
-        public string name { get; set; }
-        public bool active { get; set; }
-        public Guid AttributeValueID { get; set; }
-
-        virtual public AttributeValue AttributeValue { get; set; }
+        public string Name { get; set; }
+        public bool Active { get; set; }
+        virtual public IEnumerable<AttributeValues> AttributeValues { get; set; }
     }
 }
