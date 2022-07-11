@@ -7,35 +7,66 @@
     using vefast_src.Domain.Entities.Brands;
     using vefast_src.Domain.Entities.Categories;
     using vefast_src.Domain.Entities.ProductTypes;
+    using vefast_src.Domain.Entities.Prices;
 
     public class Products : BaseEntity
     {
-        [StringLength(255)]
+        [Required]
+        public string CodVFS { get; set; }
+
+        [Required]
+        [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
 
-        [StringLength(15)]
-        public string Sku { get; set; }
-        public double Price { get; set; }
-        public int Quantity { get; set; }
-
-        [Column(TypeName = "Text")]
+        [Column(TypeName = "varchar(1000)")]
         public string Description { get; set; }
 
-        [ForeignKey("ProductTypes")]
-        public Guid ID_ProductType { get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        public string Sku { get; set; }
+        public virtual IEquatable<Prices> Price { get; set; }
 
-        [ForeignKey("Brands")]
-        public Guid ID_Brand { get; set; }
+        [Required]
+        [Column(TypeName = "money")]
+        public double CostFOB { get; set; }
 
-        [ForeignKey("Categories")]
-        public Guid ID_Category { get; set; }
+        [Required]
+        [Column(TypeName = "money")]
+        public double Expenses { get; set; }        
 
-        [ForeignKey("Stores")]
-        public Guid ID_Store { get; set; }        
+        [Required]
+        [Column(TypeName = "int")]
+        public int Quantity { get; set; }
+
+        [Column(TypeName = "int")]
+        public int QuantityPackage { get; set; }
+
+        [Column(TypeName = "int")]
+        public int QuantityFailed { get; set; }
+
+        [Column(TypeName = "int")]
+        public int ReorderPoint { get; set; }
+
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string UnitMeasurement { get; set; }
+
         public bool Availability { get; set; }
-        public virtual ProductTypes ProductType { get; set; }
+
+        [Required]
+        [ForeignKey("Brand")]
+        public Guid ID_Brand { get; set; }
         public virtual Brands Brand { get; set; }
+
+        [Required]
+        [ForeignKey("Category")]
+        public Guid ID_Category { get; set; }
         public virtual Categories Category { get; set; }
+
+        [Required]
+        [ForeignKey("Store")]
+        public Guid ID_Store { get; set; }
         public virtual Stores Store { get; set; }
+
+
     }
 }

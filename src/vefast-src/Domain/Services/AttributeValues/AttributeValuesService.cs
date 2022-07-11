@@ -89,10 +89,8 @@ namespace vefast_src.Domain.Services.AttributeValues
                 throw new AttributeValuesNotFoundException("Valor de atributo no encontrado.");
             }
 
-            attribute_value.Value = objRequest.value;
-            attribute_value.ID_AttributeParent = objRequest.attribute_parent_id;
-            //attribute_value.products_id = objRequest.products_id;
-            attribute_value.ID_Attribute = objRequest.attributes_id;
+            attribute_value.Value = objRequest.Value;
+            attribute_value.ID_Attribute = objRequest.ID_Attribute;
             
 
             _attributeValueRepository.Update(attribute_value);

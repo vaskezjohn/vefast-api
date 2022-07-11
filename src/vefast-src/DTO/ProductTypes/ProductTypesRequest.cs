@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace vefast_src.DTO.ProductTypes
 {
     using vefast_src.Domain.Entities.Products;
+    using vefast_src.DTO.Products;
+
     public class ProductTypesRequest
     {
-        public string tipoProduct { get; set; }
-        public bool active { get; set; }
-        [ForeignKey("Products")]
-        public Guid ProductsID { get; set; }
-        public virtual Products Products { get; set; }
+        public string ProductType { get; set; }
+        public bool Active { get; set; }
+        public Guid ID_Product { get; set; }
+        public ProductsRequest Product { get; set; }
     }
 }

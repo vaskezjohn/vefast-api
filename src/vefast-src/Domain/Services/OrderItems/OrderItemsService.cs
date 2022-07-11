@@ -91,11 +91,11 @@ namespace vefast_src.Domain.Services.OrderItems
                 throw new OrderItemsNotFoundException("Numero de orden no encontrada.");
             }
 
-            orders_item.ID_Order = objRequest.order_id;
-            orders_item.ID_Product = objRequest.product_id;
-            orders_item.Quantity = objRequest.quantity;
-            orders_item.Rate = objRequest.rate;
-            orders_item.Amount = objRequest.amount;
+            orders_item.ID_Order = objRequest.ID_Order;
+            orders_item.ID_Product = objRequest.ID_Product;
+            orders_item.Quantity = objRequest.Quantity;
+            orders_item.Rate = objRequest.Rate;
+            orders_item.Amount = objRequest.Amount;
 
 
             _ordersItemRepository.Update(orders_item);

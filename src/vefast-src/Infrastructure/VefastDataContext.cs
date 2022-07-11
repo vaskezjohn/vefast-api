@@ -27,8 +27,8 @@ namespace vefast_src.Infrastructure
     {
         public VefastDataContext(DbContextOptions<VefastDataContext> options) : base(options) { }
 
+        public DbSet<AttributeValuesProducts> AttributeValuesProductTypes { get; set; }
         public DbSet<Attributes> Attributes { get; set; }
-        public DbSet<AttributeValuesProductTypes> AttributeValuesProductTypes { get; set; }
         public DbSet<AttributeValues> AttributeValues { get; set; }
         public DbSet<Brands> Brands { get; set; }
         public DbSet<Categories> Categories { get; set; }

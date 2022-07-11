@@ -5,7 +5,7 @@ using vefast_src.DTO.Company;
 
 namespace vefast_src.Domain.Services.Companies
 {
-    public interface ICompanyService
+    public interface ICompaniesService
     {
         IEnumerable<CompaniesResponse> GetAllCompany();
         Task<CompaniesResponse> CreateCompanyAsync(CompaniesRequest objRequest);

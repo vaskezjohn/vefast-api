@@ -26,7 +26,7 @@ namespace vefast_src.Domain.Services.AttributeValuesProductTypes
 
         public async Task<AttributeValuesProductTypesResponse> CreateAttributeValueTipoProductoAsync(AttributeValuesProductTypesRequest objRequest)
         {
-            var attributeValueTipoProducto = _mapper.Map<Entities.AttributeValuesProductTypes.AttributeValuesProductTypes>(objRequest);
+            var attributeValueTipoProducto = _mapper.Map<Entities.AttributeValuesProductTypes.AttributeValuesProducts>(objRequest);
             _attributeValueTipoProductoRepository.Add(attributeValueTipoProducto);
 
             try
@@ -74,8 +74,8 @@ namespace vefast_src.Domain.Services.AttributeValuesProductTypes
                 throw new AttributeValuesProductTypesNotFoundException("Objeto no encontrado.");
             }
 
-            attributeValueTipoProducto.ID_AttributeValue = objRequest.IDAttributeValue;
-            attributeValueTipoProducto.ID_ProductType = objRequest.IDTipoProducto;            
+            attributeValueTipoProducto.ID_AttributeValue = objRequest.ID_AttributeValue;
+            attributeValueTipoProducto.ID_ProductType = objRequest.ID_ProductType;            
 
             _attributeValueTipoProductoRepository.Update(attributeValueTipoProducto);
             await _attributeValueTipoProductoRepository.SaveAsync();

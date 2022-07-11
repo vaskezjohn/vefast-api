@@ -8,10 +8,10 @@ namespace vefast_src.AutoMapper.Profiles
     {
         public AttributeValuesProductTypesProfile()
         {
-            CreateMap<AttributeValuesProductTypes, AttributeValuesProductTypesResponse>()
+            CreateMap<AttributeValuesProducts, AttributeValuesProductTypesResponse>()
               .ReverseMap()
               .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<AttributeValuesProductTypes, AttributeValuesProductTypesRequest>()
+            CreateMap<AttributeValuesProducts, AttributeValuesProductTypesRequest>()
                     .ReverseMap()
                     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }

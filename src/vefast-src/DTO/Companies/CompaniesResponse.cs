@@ -9,13 +9,13 @@ namespace vefast_src.DTO.Company
     public class CompaniesResponse
     {
 		public Guid id { get; set; }
-		public string company_name { get; set; }
-		public string service_charge_value { get; set; }
-		public string vat_charge_value { get; set; }
-		public string address { get; set; }
-		public string phone { get; set; }
-		public string country { get; set; }
-		public string message { get; set; }
-		public string currency { get; set; }
+		public string CompanyName { get; set; }
+		public string ServiceChargeValue { get; set; }
+		public string VatChargeValue { get; set; }
+		public string Address { get; set; }
+		public string Phone { get; set; }
+		public string Country { get; set; }
+		public string Message { get; set; }
+		public string Currency { get; set; }
 	}
 }

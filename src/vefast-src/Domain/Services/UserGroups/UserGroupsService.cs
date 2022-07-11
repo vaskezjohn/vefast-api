@@ -90,8 +90,8 @@ namespace vefast_src.Domain.Services.UserGroups
                 throw new UserGroupsNotFoundException("Grupo de usuario no encontrado.");
             }
 
-            user_group.ID_User = objRequest.user_id;
-            user_group.ID_UserGroup = objRequest.group_id;
+            user_group.ID_User = objRequest.ID_User;
+            user_group.ID_UserGroup = objRequest.ID_Group;
     
 
             _user_groupRepository.Update(user_group);

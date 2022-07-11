@@ -76,10 +76,10 @@ namespace vefast_src.Domain.Services.Products
             }
 
             //products.attribute_value_id = objRequest.attribute_value_id;
-            products.Description = objRequest.description;
-            products.Availability = objRequest.availability;
-            products.ID_Brand = objRequest.brand_id;
-            products.ID_Category = objRequest.category_id;                     
+            products.Description = objRequest.Description;
+            products.Availability = objRequest.Availability;
+            products.ID_Brand = objRequest.ID_Brand;
+            products.ID_Category = objRequest.ID_Category;                     
             products.UpdateDate = DateTime.Now;
 
             _productsRepository.Update(products);

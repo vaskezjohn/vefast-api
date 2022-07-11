@@ -1,11 +1,12 @@
 ﻿using System;
+using vefast_src.DTO.Attributes;
+
 namespace vefast_src.DTO.AttributeValues
 {
     public class AttributeValuesResponse
     {
-        public string value { get; set; }
-        public Guid attribute_parent_id { get; set; }
-        public Guid products_id { get; set; }
-        public Guid attributes_id { get; set; }
+        public string Value { get; set; }
+        public Guid ID_Attribute { get; set; }
+        public AttributesResponse Attribute { get; set; }
     }
 }

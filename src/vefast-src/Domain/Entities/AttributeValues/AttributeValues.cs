@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
-    using vefast_src.Domain.Entities.AttributeValuesProductTypes;
+    using vefast_src.Domain.Entities.Attributes;
 
     public class AttributeValues : BaseEntity
     {
@@ -10,6 +10,6 @@
 
         [ForeignKey("Attribute")]
         public Guid ID_Attribute { get; set; }
-        public virtual Attribute Attribute { get; set; }
+        public virtual Attributes Attribute { get; set; }
     }
 }

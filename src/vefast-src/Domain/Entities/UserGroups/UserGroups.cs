@@ -10,7 +10,7 @@
         [ForeignKey("Users")]
         public Guid ID_User { get; set; }
 
-        [ForeignKey("UserGroup")]
+        [ForeignKey("UserGroups")]
         public Guid ID_UserGroup { get; set; }
         public virtual Users User { get; set; }
         public virtual UserGroups UserGroup { get; set; }

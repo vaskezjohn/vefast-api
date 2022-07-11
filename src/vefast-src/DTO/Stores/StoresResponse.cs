@@ -3,8 +3,8 @@ namespace vefast_src.DTO.Stores
 {
     public class StoresResponse
     {
-        public string name { get; set; }
-        public bool active { get; set; }
-        public Guid Company_id { get; set; }
+        public string Name { get; set; }
+        public bool Active { get; set; }
+        public Guid ID_Company { get; set; }
     }
 }

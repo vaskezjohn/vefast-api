@@ -8,7 +8,7 @@
     public class OrderItems : BaseEntity
     {
         [ForeignKey("Orders")]
-        public int ID_Order { get; set; }
+        public Guid ID_Order { get; set; }
 
         [ForeignKey("Products")]
         public Guid ID_Product { get; set; }

@@ -90,12 +90,12 @@ namespace vefast_src.Domain.Services.Companies
                 throw new CompaniesNotFoundException("Empresa no encontrada.");
             }
 
-            company.Address = objRequest.address;
-            company.CompanyName = objRequest.company_name;
-            company.Country = objRequest.country;
-            company.Currency = objRequest.currency;
-            company.Message = objRequest.message;
-            company.Phone = objRequest.phone;
+            company.Address = objRequest.Address;
+            company.CompanyName = objRequest.CompanyName;
+            company.Country = objRequest.Country;
+            company.Currency = objRequest.Currency;
+            company.Message = objRequest.Message;
+            company.Phone = objRequest.Phone;
             company.UpdateDate = DateTime.Now;
 
             _companyRepository.Update(company);

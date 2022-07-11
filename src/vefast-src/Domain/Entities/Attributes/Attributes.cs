@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Collections.Generic;
     using vefast_src.Domain.Entities.AttributeValues;
+    using System.ComponentModel.DataAnnotations;
 
     public class Attributes : BaseEntity
     {

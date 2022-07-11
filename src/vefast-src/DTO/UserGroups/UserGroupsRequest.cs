@@ -3,7 +3,7 @@ namespace vefast_src.DTO.UserGroups
 {
     public class UserGroupsRequest
     {
-        public Guid user_id { get; set; }
-        public Guid group_id { get; set; }
+        public Guid ID_User { get; set; }
+        public Guid ID_Group { get; set; }
     }
 }

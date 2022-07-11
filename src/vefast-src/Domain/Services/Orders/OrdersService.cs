@@ -90,21 +90,21 @@ namespace vefast_src.Domain.Services.Orders
                 throw new OrdersNotFoundException("Orden no encontrada.");
             }
 
-            orders.BillNo = objRequest.bill_no;
-            orders.CustomerName = objRequest.customer_name;
-            orders.CustomerAddress = objRequest.customer_address;
-            orders.CustomerPhone = objRequest.customer_phone;
-            orders.DateTimeIn = objRequest.date_time;
-            orders.GrossAmount = objRequest.gross_amount;
-            orders.ServiceChargeRate = objRequest.service_charge_rate;
-            orders.ServiceCharge = objRequest.service_charge;
-            orders.VatChargeRate = objRequest.vat_charge_rate;
-            orders.VatCharge = objRequest.vat_charge;
-            orders.NetAmount = objRequest.net_amount;
-            orders.Discount = objRequest.discount;
-            orders.PaidStatus = objRequest.paid_status;
-            orders.ID_User = objRequest.users_id;
-            orders.ID_OrderItem = objRequest.orders_item_id;
+            orders.BillNo = objRequest.BillNo;
+            orders.CustomerName = objRequest.CustomerName;
+            orders.CustomerAddress = objRequest.CustomerAddress;
+            orders.CustomerPhone = objRequest.CustomerPhone;
+            orders.DateTimeIn = objRequest.DateTimeIn;
+            orders.GrossAmount = objRequest.GrossAmount;
+            orders.ServiceChargeRate = objRequest.ServiceChargeRate;
+            orders.ServiceCharge = objRequest.ServiceCharge;
+            orders.VatChargeRate = objRequest.VatChargeRate;
+            orders.VatCharge = objRequest.VatCharge;
+            orders.NetAmount = objRequest.NetAmount;
+            orders.Discount = objRequest.Discount;
+            orders.PaidStatus = objRequest.PaidStatus;
+            orders.ID_User = objRequest.ID_User;
+            orders.ID_OrderItem = objRequest.ID_OrderItem;
 
             _ordersRepository.Update(orders);
             await _ordersRepository.SaveAsync();

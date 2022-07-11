@@ -74,9 +74,9 @@ namespace vefast_src.Domain.Services.Stores
                 throw new StoresNotFoundException("Tienda no encontrada.");
             }
 
-            stores.ID = objRequest.Company_id;
-            stores.Name = objRequest.name;
-            stores.Active = objRequest.active;
+            stores.ID = objRequest.ID_Company;
+            stores.Name = objRequest.Name;
+            stores.Active = objRequest.Active;
             
             _storesRepository.Update(stores);
             await _storesRepository.SaveAsync();

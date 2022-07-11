@@ -90,8 +90,8 @@ namespace vefast_src.Domain.Services.Attributes
                 throw new AttributesNotFoundException("Empresa no encontrada.");
             }
 
-            attributes.Name = objRequest.name;
-            attributes.Active = objRequest.active;
+            attributes.Name = objRequest.Name;
+            attributes.Active = objRequest.Active;
            
 
             _attributesRepository.Update(attributes);

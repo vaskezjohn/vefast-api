@@ -75,9 +75,9 @@ namespace vefast_src.Domain.Services.ProductTypes
                 throw new ProductTypesNotFoundException("Tipo de producto no encontrado.");
             }
             /*Revisar*/
-            tipoProducto.Active = objRequest.active;
+            tipoProducto.Active = objRequest.Active;
             //tipoProducto.Products = objRequest.Products;
-            tipoProducto.ProductType = objRequest.tipoProduct;
+            tipoProducto.ProductType = objRequest.ProductType;
             /**/ 
             
 

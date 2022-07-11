@@ -1,4 +1,4 @@
-﻿namespace vefast_src.Domain.Entities.AttributeValuesProductTypes
+﻿namespace vefast_src.Domain.Entities.AttributeValuesProducts
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
