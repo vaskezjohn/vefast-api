@@ -1,23 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace vefast_src.Domain.Entities.Users
 {
-    public class Users
-    {
-		[Key]
-		public Guid ID { get; set; }
-		public string User { get; set; }
-		public string Password { get; set; }
-		public string Email { get; set; }
-		public string Firstname { get; set; }
-		public string Lastname { get; set; }
-		public string Phone { get; set; }
-		public int Gender { get; set; }
+    public class Users : IdentityUser
+	{
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string AccessToken { get; set; }
+		public DateTime? TokenExpiryTime { get; set; }
+		public string RefreshToken { get; set; }
+		public DateTime? RefreshTokenExpiryTime { get; set; }
 
-		//public DateTime InsertDate { get; set; }
-		//public DateTime UpdateDate { get; set; }
-		//public virtual Users UpdateUser { get; set; }
-		//public virtual Users InsertUser { get; set; }
+		[ForeignKey("User")]
+		public string ID_InsertUser { get; set; }
+		public virtual Users User { get; set; }
+		public DateTime? InsertDate { get; set; }
 	}
 }

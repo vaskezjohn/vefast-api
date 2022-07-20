@@ -8,6 +8,7 @@
     using vefast_src.Domain.Entities.Categories;
     using vefast_src.Domain.Entities.ProductTypes;
     using vefast_src.Domain.Entities.Prices;
+    using System.Collections.Generic;
 
     public class Products : BaseEntity
     {
@@ -23,14 +24,14 @@
 
         [Column(TypeName = "nvarchar(100)")]
         public string Sku { get; set; }
-        public virtual IEquatable<Prices> Price { get; set; }
+        public virtual ICollection<Prices> Price { get; set; }
 
         [Required]
-        [Column(TypeName = "money")]
+        [Column(TypeName = "decimal(15,2)")]
         public double CostFOB { get; set; }
 
         [Required]
-        [Column(TypeName = "money")]
+        [Column(TypeName = "decimal(15,2)")]
         public double Expenses { get; set; }        
 
         [Required]

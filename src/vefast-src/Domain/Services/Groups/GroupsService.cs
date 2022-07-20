@@ -34,9 +34,9 @@ namespace vefast_src.Domain.Services.Groups
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<GroupsResponse> GetAllGroups()
+        public ICollection<GroupsResponse> GetAllGroups()
         {
-            return _mapper.Map<IEnumerable<GroupsResponse>>(_groupsRepository.GetAll());
+            return _mapper.Map<ICollection<GroupsResponse>>(_groupsRepository.GetAll());
         }
 
         public async Task<GroupsResponse> CreateGroupsAsync(GroupsRequest objRequest)

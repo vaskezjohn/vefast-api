@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.ProductTypes
 {
     public interface IProductTypesService
     {
-        IEnumerable<ProductTypesResponse> GetAllTipoProducto();
+        ICollection<ProductTypesResponse> GetAllTipoProducto();
         Task<ProductTypesResponse> CreateTipoProductoAsync(ProductTypesRequest objRequest);
         Task<ProductTypesResponse> GetTipoProductoByIdAsync(Guid id);
         Task DeleteTipoProductoById(Guid id);

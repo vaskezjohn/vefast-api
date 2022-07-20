@@ -8,8 +8,13 @@
 
     public class Attributes : BaseEntity
     {
+        [Required]
+        [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
+
+        [Column(TypeName = "varchar(500)")]
+        public string Description { get; set; }
         public bool Active { get; set; }
-        virtual public IEnumerable<AttributeValues> AttributeValues { get; set; }
+        public virtual ICollection<AttributeValues> AttributeValues { get; set; }
     }
 }

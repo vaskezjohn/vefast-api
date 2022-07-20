@@ -34,9 +34,9 @@ namespace vefast_src.Domain.Services.Orders
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<OrdersResponse> GetAllOrders()
+        public ICollection<OrdersResponse> GetAllOrders()
         {
-            return _mapper.Map<IEnumerable<OrdersResponse>>(_ordersRepository.GetAll());
+            return _mapper.Map<ICollection<OrdersResponse>>(_ordersRepository.GetAll());
         }
 
         public async Task<OrdersResponse> CreateOrdersAsync(OrdersRequest objRequest)
@@ -103,8 +103,6 @@ namespace vefast_src.Domain.Services.Orders
             orders.NetAmount = objRequest.NetAmount;
             orders.Discount = objRequest.Discount;
             orders.PaidStatus = objRequest.PaidStatus;
-            orders.ID_User = objRequest.ID_User;
-            orders.ID_OrderItem = objRequest.ID_OrderItem;
 
             _ordersRepository.Update(orders);
             await _ordersRepository.SaveAsync();

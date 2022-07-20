@@ -9,6 +9,6 @@ namespace vefast_src.DTO.Attributes
         public Guid ID { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
-        public IEnumerable<AttributeValuesResponse> AttributeValues { get; set; }
+        public ICollection<AttributeValuesResponse> AttributeValues { get; set; }
     }
 }

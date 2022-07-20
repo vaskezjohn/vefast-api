@@ -1,6 +1,7 @@
 ﻿namespace vefast_src.Domain.Entities.Orders
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using vefast_src.Domain.Entities.OrderItems;
     using vefast_src.Domain.Entities.Users;
@@ -20,14 +21,6 @@
         public double NetAmount { get; set; } /*Importe neto*/
         public double Discount { get; set; }/*Descuento*/
         public int PaidStatus { get; set; } /*Estado del pago*/
-
-        [ForeignKey("Users")]
-        public Guid ID_User { get; set; }
-
-        [ForeignKey("OrderItems")]
-        public Guid ID_OrderItem { get; set; }
-
-        public virtual Users User { get; set; }
-        public virtual OrderItems OrderItem { get; set; }
+        public virtual ICollection<OrderItems> OrderItems { get; set; }
     }
 }

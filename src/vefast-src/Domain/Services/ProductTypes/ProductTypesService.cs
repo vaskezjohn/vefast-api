@@ -20,9 +20,9 @@ namespace vefast_src.Domain.Services.ProductTypes
             this._tipoProductoRepository = tipoProductoRepository;
         }
 
-        public IEnumerable<ProductTypesResponse> GetAllTipoProducto()
+        public ICollection<ProductTypesResponse> GetAllTipoProducto()
         {
-            return _mapper.Map<IEnumerable<ProductTypesResponse>>(_tipoProductoRepository.GetAll());
+            return _mapper.Map<ICollection<ProductTypesResponse>>(_tipoProductoRepository.GetAll());
         }
 
         public async Task<ProductTypesResponse> CreateTipoProductoAsync(ProductTypesRequest objRequest)
@@ -77,7 +77,7 @@ namespace vefast_src.Domain.Services.ProductTypes
             /*Revisar*/
             tipoProducto.Active = objRequest.Active;
             //tipoProducto.Products = objRequest.Products;
-            tipoProducto.ProductType = objRequest.ProductType;
+            tipoProducto.Name = objRequest.Name;
             /**/ 
             
 

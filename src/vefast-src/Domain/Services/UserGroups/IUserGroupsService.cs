@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.UserGroups
 {
     public interface IUserGroupsService
     {
-        IEnumerable<UserGroupsResponse> GetAllUserGroup();
+        ICollection<UserGroupsResponse> GetAllUserGroup();
         Task<UserGroupsResponse> CreateUserGroupAsync(UserGroupsRequest objRequest);
         Task<UserGroupsResponse> GetUserGroupByIdAsync(Guid id);
         Task DeleteUserGroupById(Guid id);

@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Stock
 {
     public interface IStockService
     {
-        IEnumerable<StockResponse> GetAllStock();
+        ICollection<StockResponse> GetAllStock();
         Task<StockResponse> CreateStockAsync(StockRequest objRequest);
         Task<StockResponse> GetStockByIdAsync(Guid id);
         Task DeleteStockById(Guid id);

@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Categories
 {
     public interface ICategoriesService
     {
-        IEnumerable<CategoriesResponse> GetAllCategories();
+        ICollection<CategoriesResponse> GetAllCategories();
         Task<CategoriesResponse> CreateCategoriesAsync(CategoriesRequest objRequest);
         Task<CategoriesResponse> GetCategoriesByIdAsync(Guid id);
         Task DeleteCategoriesById(Guid id);

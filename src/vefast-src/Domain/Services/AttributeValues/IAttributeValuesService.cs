@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.AttributeValues
 {
     public interface IAttributeValuesService
     {
-        IEnumerable<AttributeValuesResponse> GetAllAttributeValue();
+        ICollection<AttributeValuesResponse> GetAllAttributeValue();
         Task<AttributeValuesResponse> CreateAttributeValueAsync(AttributeValuesRequest objRequest);
         Task<AttributeValuesResponse> GetAttributeValueByIdAsync(Guid id);
         Task DeleteAttributeValueById(Guid id);

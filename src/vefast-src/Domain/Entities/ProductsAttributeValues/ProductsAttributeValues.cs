@@ -1,11 +1,11 @@
-﻿namespace vefast_src.Domain.Entities.AttributeValuesProducts
+﻿namespace vefast_src.Domain.Entities.ProductsAttributeValues
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using vefast_src.Domain.Entities.AttributeValues;
     using vefast_src.Domain.Entities.ProductTypes;
 
-    public class AttributeValuesProductTypes : BaseEntity
+    public class ProductsAttributeValues : BaseEntity
     {
         [ForeignKey("AttributeValues")]
         public Guid ID_AttributeValue { get; set; }

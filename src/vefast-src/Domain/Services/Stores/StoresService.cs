@@ -19,9 +19,9 @@ namespace vefast_src.Domain.Services.Stores
             this._storesRepository = storesRepository;
         }
 
-        public IEnumerable<StoresResponse> GetAllStores()
+        public ICollection<StoresResponse> GetAllStores()
         {
-            return _mapper.Map<IEnumerable<StoresResponse>>(_storesRepository.GetAll());
+            return _mapper.Map<ICollection<StoresResponse>>(_storesRepository.GetAll());
         }
 
         public async Task<StoresResponse> CreateStoresAsync(StoresRequest objRequest)

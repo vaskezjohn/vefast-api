@@ -8,7 +8,7 @@ namespace vefast_src.DTO.Company
 {
     public class CompaniesRequest
     {
-		public string CompanyName { get; set; }
+		public string Name { get; set; }
 		public string ServiceChargeValue { get; set; }
 		public string VatChargeValue { get; set; }
 		public string Address { get; set; }

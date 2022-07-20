@@ -31,6 +31,11 @@ using Microsoft.OData.ModelBuilder;
 using vefast_src.Domain.Entities.Categories;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
 using vefast_src.Domain.Entities.Companies;
+using vefast_src.Domain.Entities.Users;
+using vefast_src.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace vefast_api
 {
@@ -50,19 +55,40 @@ namespace vefast_api
             //services.AddControllers(mvcOptions =>
             //    mvcOptions.EnableEndpointRouting = false);
 
-            //services.AddControllers().AddOData(options => options.Select().Expand().OrderBy().Filter().SkipToken().SetMaxTop(null).Count());
+            services.AddIdentity<Users, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                //options.Password.RequiredLength = 15;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.SignIn.RequireConfirmedEmail = true;
+            })
+                    .AddEntityFrameworkStores<VefastDataContext>()
+                    .AddDefaultTokenProviders();
 
-            //services.AddControllers().AddOData(options =>
-            //{
-            //    options.EnableQueryFeatures();
-            //    var routeOptions = options.AddRouteComponents(GetEdmModel()).Select().Filter().Count().Expand().RouteOptions;
+            services.AddScoped<RoleManager<IdentityRole>>();
 
-            //    routeOptions.EnableQualifiedOperationCall =
-            //    routeOptions.EnableKeyAsSegment =
-            //    routeOptions.EnableKeyInParenthesis = true;
-            //});
-            //services.AddControllers().AddOData(opt => { 
-            //    opt.Conventions.Remove(opt.Conventions.OfType<MetadataRoutingConvention>().First()); opt.AddRouteComponents(GetEdmModel()).Select().Filter().Expand().Count().OrderBy().SetMaxTop(100); });
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JwtSecurityToken:Issuer"],
+                    ValidAudience = Configuration["JwtSecurityToken:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityToken:Secret"]))
+                };
+            });
 
 
             services.AddControllers().AddOData(opt => opt.Select().Filter().Expand().Count().OrderBy().SetMaxTop(100)
@@ -74,6 +100,7 @@ namespace vefast_api
             });
 
             services.AddAutoMapper(typeof(CompaniesProfile));
+            services.AddAutoMapper(typeof(UsersProfile));
 
             services.AddMvc()
                 .AddJsonOptions(opt => opt.JsonSerializerOptions.MaxDepth = 2)
@@ -85,9 +112,41 @@ namespace vefast_api
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "VeFaSt-Api", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "VeFaSt-Api",
+                    Version = "v1"
+                });
                 options.OperationFilter<ODataQueryOptionsFilter>();
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Autorización",
+                    Description = "Ingrese el token de autorización (JWT)",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "Bearer {token}",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                });
+                //options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                //{
+                //    {
+                //          new OpenApiSecurityScheme
+                //            {
+                //                Reference = new OpenApiReference
+                //                {
+                //                    Type = ReferenceType.SecurityScheme,
+                //                    Id = "Bearer"
+                //                }
+                //            },
+                //            new string[] {}
+                //    }
+                //});
             });
 
             services.Configure<ForwardedHeadersOptions>(options =>
@@ -96,10 +155,18 @@ namespace vefast_api
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
 
+
             //services.Configure<ForwardedHeadersOptions>(options =>
             //{
             //    options.KnownProxies.Add(IPAddress.Parse("93.188.167.3"));
             //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", build =>
+                    build.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
 
             services.AddMvcCore(options =>
             {
@@ -119,7 +186,6 @@ namespace vefast_api
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var basePath = "/vefast-api";
@@ -138,16 +204,14 @@ namespace vefast_api
                     c.RouteTemplate = "swagger/{documentName}/swagger.json";
                     c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
                     {
-                        swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" }};
+                        swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" } };
                     });
                 });
             }
 
-           
-
             app.UseSwaggerUI(c =>
             {
-               c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1");
             });
 
             app.UseCors(builder =>
@@ -159,12 +223,12 @@ namespace vefast_api
             });
 
             app.UseHttpsRedirection();
+
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //app.UseRequestLocalization();
-
-
 
             //app.UseMvc(routeBuilder =>
             //{
@@ -176,7 +240,6 @@ namespace vefast_api
             //    routeBuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
             //});
 
-            //app.MapControllers();
             //app.MapControllers();
 
             app.UseEndpoints(endpoints =>

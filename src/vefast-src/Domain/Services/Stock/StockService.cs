@@ -19,14 +19,14 @@ namespace vefast_src.Domain.Services.Stock
             this._stockRepository = stockRepository;
         }
 
-        public IEnumerable<StockResponse> GetAllStock()
+        public ICollection<StockResponse> GetAllStock()
         {
-            return _mapper.Map<IEnumerable<StockResponse>>(_stockRepository.GetAll());
+            return _mapper.Map<ICollection<StockResponse>>(_stockRepository.GetAll());
         }
 
         public async Task<StockResponse> CreateStockAsync(StockRequest objRequest)
         {
-            var stock = _mapper.Map<Entities.Stock.Stock>(objRequest);
+            var stock = _mapper.Map<Entities.StockDeposits.StockDeposits>(objRequest);
             _stockRepository.Add(stock);
 
             try
@@ -75,7 +75,7 @@ namespace vefast_src.Domain.Services.Stock
             }
 
             stock.ID_Product = objRequest.ID_Product;
-            stock.Cantidad = objRequest.Cantidad;
+            stock.Quantity = objRequest.Quantity;
             
 
             _stockRepository.Update(stock);

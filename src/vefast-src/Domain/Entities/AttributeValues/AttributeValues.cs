@@ -6,6 +6,7 @@
 
     public class AttributeValues : BaseEntity
     {
+        [Column(TypeName = "varchar(500)")]
         public string Value { get; set; }
 
         [ForeignKey("Attribute")]

@@ -19,14 +19,14 @@ namespace vefast_src.Domain.Services.AttributeValuesProductTypes
             this._attributeValueTipoProductoRepository = attributeValueTipoProductoRepository;
         }
 
-        public IEnumerable<AttributeValuesProductTypesResponse> GetAllAttributeValueTipoProducto()
+        public ICollection<AttributeValuesProductTypesResponse> GetAllAttributeValueTipoProducto()
         {
-            return _mapper.Map<IEnumerable<AttributeValuesProductTypesResponse>>(_attributeValueTipoProductoRepository.GetAll());
+            return _mapper.Map<ICollection<AttributeValuesProductTypesResponse>>(_attributeValueTipoProductoRepository.GetAll());
         }
 
         public async Task<AttributeValuesProductTypesResponse> CreateAttributeValueTipoProductoAsync(AttributeValuesProductTypesRequest objRequest)
         {
-            var attributeValueTipoProducto = _mapper.Map<Entities.AttributeValuesProductTypes.AttributeValuesProducts>(objRequest);
+            var attributeValueTipoProducto = _mapper.Map<Entities.ProductsAttributeValues.ProductsAttributeValues>(objRequest);
             _attributeValueTipoProductoRepository.Add(attributeValueTipoProducto);
 
             try

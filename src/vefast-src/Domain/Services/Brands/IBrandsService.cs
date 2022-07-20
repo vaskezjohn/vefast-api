@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Brands
 {
     public interface IBrandsService
     {
-        IEnumerable<BrandsResponse> GetAllBrands();
+        ICollection<BrandsResponse> GetAllBrands();
         Task<BrandsResponse> CreateBrandsAsync(BrandsRequest objRequest);
         Task<BrandsResponse> GetBrandsByIdAsync(Guid id);
         Task DeleteBrandsById(Guid id);

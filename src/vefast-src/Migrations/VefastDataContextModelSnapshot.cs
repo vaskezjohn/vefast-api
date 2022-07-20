@@ -15,7 +15,135 @@ namespace vefast_src.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.8");
+                .HasAnnotation("ProductVersion", "5.0.17");
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValues.AttributeValues", b =>
                 {
@@ -29,70 +157,27 @@ namespace vefast_src.Migrations
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(500)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ID_Attribute");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("AttributeValues");
-                });
-
-            modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValuesProductTypes.AttributeValuesProductTypes", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("AttributeValueID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ID_AttributeValue")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ID_ProductType")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("ProductTypeID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AttributeValueID");
-
-                    b.HasIndex("InsertUserID");
-
-                    b.HasIndex("ProductTypeID");
-
-                    b.HasIndex("UpdateUserID");
-
-                    b.ToTable("AttributeValuesProductTypes");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Attributes.Attributes", b =>
@@ -104,28 +189,67 @@ namespace vefast_src.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(500)");
+
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Attributes");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.BookkeepingEntries.BookkeepingEntries", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("char(10)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("BookkeepingEntries");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Brands.Brands", b =>
@@ -137,26 +261,31 @@ namespace vefast_src.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(500)");
+
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Brands");
                 });
@@ -170,26 +299,32 @@ namespace vefast_src.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<Guid>("ID_ParentCategory")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("ID_ParentCategory");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Categories");
                 });
@@ -201,89 +336,121 @@ namespace vefast_src.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Address")
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("CompanyName")
-                        .HasMaxLength(255)
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Country")
-                        .HasMaxLength(255)
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Currency")
-                        .HasMaxLength(255)
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Message")
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Phone")
-                        .HasMaxLength(255)
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("ServiceChargeValue")
-                        .HasMaxLength(255)
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("VatChargeValue")
-                        .HasMaxLength(255)
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Groups.Groups", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.Countries.Countries", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("GroupName")
-                        .HasColumnType("longtext");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Permission")
-                        .HasColumnType("longtext");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.IVACategories.IVACategories", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("Percentage")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("IVACategories");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.OrderItems.OrderItems", b =>
@@ -304,8 +471,8 @@ namespace vefast_src.Migrations
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -316,19 +483,18 @@ namespace vefast_src.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ID_Order")
-                        .IsUnique();
+                    b.HasIndex("ID_Order");
 
                     b.HasIndex("ID_Product");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("OrderItems");
                 });
@@ -360,17 +526,11 @@ namespace vefast_src.Migrations
                     b.Property<double>("GrossAmount")
                         .HasColumnType("double");
 
-                    b.Property<Guid>("ID_OrderItem")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ID_User")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<double>("NetAmount")
                         .HasColumnType("double");
@@ -387,11 +547,8 @@ namespace vefast_src.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("UserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<double>("VatCharge")
                         .HasColumnType("double");
@@ -401,13 +558,87 @@ namespace vefast_src.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
-
-                    b.HasIndex("UserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.PriceTypes.PriceTypes", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(1000)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("PriceTypes");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Prices.Prices", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_PriceType")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_Product")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(15,2)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<double>("Utility")
+                        .HasColumnType("double");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ID_PriceType");
+
+                    b.HasIndex("ID_Product");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("Prices");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.ProductTypes.ProductTypes", b =>
@@ -419,26 +650,31 @@ namespace vefast_src.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(500)");
+
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ProductType")
-                        .HasColumnType("longtext");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("ProductTypes");
                 });
@@ -452,22 +688,23 @@ namespace vefast_src.Migrations
                     b.Property<bool>("Availability")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("BrandID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("CodVFS")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<Guid?>("CategoryID")
-                        .HasColumnType("char(36)");
+                    b.Property<decimal>("CostFOB")
+                        .HasColumnType("decimal(15,2)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("Text");
+                        .HasColumnType("varchar(1000)");
+
+                    b.Property<decimal>("Expenses")
+                        .HasColumnType("decimal(15,2)");
 
                     b.Property<Guid>("ID_Brand")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("ID_Category")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ID_ProductType")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("ID_Store")
@@ -476,88 +713,263 @@ namespace vefast_src.Migrations
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(255)
+                    b.Property<string>("InsertUserId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<Guid?>("ProductTypeID")
+                    b.Property<Guid?>("ProductTypesID")
                         .HasColumnType("char(36)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sku")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                    b.Property<int>("QuantityFailed")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("StoreID")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("QuantityPackage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReorderPoint")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Sku")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UnitMeasurement")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BrandID");
+                    b.HasIndex("ID_Brand");
 
-                    b.HasIndex("CategoryID");
+                    b.HasIndex("ID_Category");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("ID_Store");
 
-                    b.HasIndex("ProductTypeID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("StoreID");
+                    b.HasIndex("ProductTypesID");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Stock.Stock", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.ProductsAttributeValues.ProductsAttributeValues", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("AttributeValueID")
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ID_Product")
+                    b.Property<Guid>("ID_AttributeValue")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_ProductType")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<Guid?>("ProductID")
+                    b.Property<Guid?>("ProductTypeID")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("AttributeValueID");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("ProductTypeID");
 
-                    b.ToTable("Stock");
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("ProductsAttributeValues");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Providers.Providers", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("CUIT")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CellPhone")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("CodVFS")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<Guid>("ID_Country")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_IVACategory")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_ImputationCredit")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_ImputationDebit")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_Province")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Observations")
+                        .HasColumnType("nvarchar(10000)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Referrer")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ID_Country");
+
+                    b.HasIndex("ID_IVACategory");
+
+                    b.HasIndex("ID_ImputationCredit");
+
+                    b.HasIndex("ID_ImputationDebit");
+
+                    b.HasIndex("ID_Province");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("Providers");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Provinces.Provinces", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("Provinces");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.StockDeposits.StockDeposits", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_Product")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ID_Store")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ID_Product");
+
+                    b.HasIndex("ID_Store");
+
+                    b.HasIndex("InsertUserId");
+
+                    b.HasIndex("UpdateUserId");
+
+                    b.ToTable("StockDeposits");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Stores.Stores", b =>
@@ -578,99 +990,169 @@ namespace vefast_src.Migrations
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("InsertUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UpdateUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("CompanyID");
 
-                    b.HasIndex("InsertUserID");
+                    b.HasIndex("InsertUserId");
 
-                    b.HasIndex("UpdateUserID");
+                    b.HasIndex("UpdateUserId");
 
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.UserGroups.UserGroups", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ID_User")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ID_UserGroup")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("InsertUserID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("UpdateUserID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("UserID")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ID_UserGroup");
-
-                    b.HasIndex("InsertUserID");
-
-                    b.HasIndex("UpdateUserID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("UserGroups");
-                });
-
             modelBuilder.Entity("vefast_src.Domain.Entities.Users.Users", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Firstname")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Gender")
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("AccessToken")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FirstName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("User")
+                    b.Property<string>("ID_InsertUser")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("InsertDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ID");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.ToTable("Users");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("TokenExpiryTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ID_InsertUser");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValues.AttributeValues", b =>
@@ -683,12 +1165,12 @@ namespace vefast_src.Migrations
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Attribute");
@@ -698,47 +1180,33 @@ namespace vefast_src.Migrations
                     b.Navigation("UpdateUser");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.AttributeValuesProductTypes.AttributeValuesProductTypes", b =>
-                {
-                    b.HasOne("vefast_src.Domain.Entities.AttributeValues.AttributeValues", "AttributeValue")
-                        .WithMany()
-                        .HasForeignKey("AttributeValueID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
-                        .WithMany()
-                        .HasForeignKey("InsertUserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.ProductTypes.ProductTypes", "ProductType")
-                        .WithMany()
-                        .HasForeignKey("ProductTypeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
-                        .WithMany()
-                        .HasForeignKey("UpdateUserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("AttributeValue");
-
-                    b.Navigation("InsertUser");
-
-                    b.Navigation("ProductType");
-
-                    b.Navigation("UpdateUser");
-                });
-
             modelBuilder.Entity("vefast_src.Domain.Entities.Attributes.Attributes", b =>
                 {
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("UpdateUser");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.BookkeepingEntries.BookkeepingEntries", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
@@ -750,12 +1218,12 @@ namespace vefast_src.Migrations
                 {
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
@@ -765,15 +1233,23 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Categories.Categories", b =>
                 {
+                    b.HasOne("vefast_src.Domain.Entities.Categories.Categories", "Category")
+                        .WithMany()
+                        .HasForeignKey("ID_ParentCategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Category");
 
                     b.Navigation("InsertUser");
 
@@ -784,12 +1260,12 @@ namespace vefast_src.Migrations
                 {
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
@@ -797,16 +1273,33 @@ namespace vefast_src.Migrations
                     b.Navigation("UpdateUser");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Groups.Groups", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.Countries.Countries", b =>
                 {
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("UpdateUser");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.IVACategories.IVACategories", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
@@ -817,8 +1310,8 @@ namespace vefast_src.Migrations
             modelBuilder.Entity("vefast_src.Domain.Entities.OrderItems.OrderItems", b =>
                 {
                     b.HasOne("vefast_src.Domain.Entities.Orders.Orders", "Orders")
-                        .WithOne("OrderItem")
-                        .HasForeignKey("vefast_src.Domain.Entities.OrderItems.OrderItems", "ID_Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ID_Order")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -830,12 +1323,12 @@ namespace vefast_src.Migrations
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
@@ -851,36 +1344,79 @@ namespace vefast_src.Migrations
                 {
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
 
                     b.Navigation("UpdateUser");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("vefast_src.Domain.Entities.PriceTypes.PriceTypes", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("UpdateUser");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Prices.Prices", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.PriceTypes.PriceTypes", "PriceType")
+                        .WithMany()
+                        .HasForeignKey("ID_PriceType")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Products.Products", "Product")
+                        .WithMany("Price")
+                        .HasForeignKey("ID_Product")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("PriceType");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("UpdateUser");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.ProductTypes.ProductTypes", b =>
                 {
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
@@ -892,32 +1428,35 @@ namespace vefast_src.Migrations
                 {
                     b.HasOne("vefast_src.Domain.Entities.Brands.Brands", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ID_Brand")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("vefast_src.Domain.Entities.Categories.Categories", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
-                        .WithMany()
-                        .HasForeignKey("InsertUserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.ProductTypes.ProductTypes", "ProductType")
-                        .WithMany("Products")
-                        .HasForeignKey("ProductTypeID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ID_Category")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("vefast_src.Domain.Entities.Stores.Stores", "Store")
                         .WithMany()
-                        .HasForeignKey("StoreID")
+                        .HasForeignKey("ID_Store")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.ProductTypes.ProductTypes", null)
+                        .WithMany("Products")
+                        .HasForeignKey("ProductTypesID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Brand");
@@ -926,33 +1465,145 @@ namespace vefast_src.Migrations
 
                     b.Navigation("InsertUser");
 
-                    b.Navigation("ProductType");
-
                     b.Navigation("Store");
 
                     b.Navigation("UpdateUser");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.Stock.Stock", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.ProductsAttributeValues.ProductsAttributeValues", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                    b.HasOne("vefast_src.Domain.Entities.AttributeValues.AttributeValues", "AttributeValue")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("AttributeValueID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("vefast_src.Domain.Entities.Products.Products", "Product")
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.ProductTypes.ProductTypes", "ProductType")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("AttributeValue");
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("ProductType");
+
+                    b.Navigation("UpdateUser");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Providers.Providers", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Countries.Countries", "Country")
+                        .WithMany()
+                        .HasForeignKey("ID_Country")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.IVACategories.IVACategories", "IVACategory")
+                        .WithMany()
+                        .HasForeignKey("ID_IVACategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.BookkeepingEntries.BookkeepingEntries", "BookkeepingEntryCredit")
+                        .WithMany()
+                        .HasForeignKey("ID_ImputationCredit")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.BookkeepingEntries.BookkeepingEntries", "BookkeepingEntryDebit")
+                        .WithMany()
+                        .HasForeignKey("ID_ImputationDebit")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Provinces.Provinces", "Province")
+                        .WithMany()
+                        .HasForeignKey("ID_Province")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("BookkeepingEntryCredit");
+
+                    b.Navigation("BookkeepingEntryDebit");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("IVACategory");
+
+                    b.Navigation("Province");
+
+                    b.Navigation("UpdateUser");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Provinces.Provinces", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InsertUser");
+
+                    b.Navigation("UpdateUser");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.StockDeposits.StockDeposits", b =>
+                {
+                    b.HasOne("vefast_src.Domain.Entities.Products.Products", "Product")
+                        .WithMany()
+                        .HasForeignKey("ID_Product")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Stores.Stores", "Store")
+                        .WithMany()
+                        .HasForeignKey("ID_Store")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
+                        .WithMany()
+                        .HasForeignKey("InsertUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("InsertUser");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Store");
 
                     b.Navigation("UpdateUser");
                 });
@@ -966,12 +1617,12 @@ namespace vefast_src.Migrations
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
                         .WithMany()
-                        .HasForeignKey("InsertUserID")
+                        .HasForeignKey("InsertUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
                         .WithMany()
-                        .HasForeignKey("UpdateUserID")
+                        .HasForeignKey("UpdateUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Company");
@@ -981,36 +1632,14 @@ namespace vefast_src.Migrations
                     b.Navigation("UpdateUser");
                 });
 
-            modelBuilder.Entity("vefast_src.Domain.Entities.UserGroups.UserGroups", b =>
+            modelBuilder.Entity("vefast_src.Domain.Entities.Users.Users", b =>
                 {
-                    b.HasOne("vefast_src.Domain.Entities.UserGroups.UserGroups", "UserGroup")
-                        .WithMany()
-                        .HasForeignKey("ID_UserGroup")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "InsertUser")
-                        .WithMany()
-                        .HasForeignKey("InsertUserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("vefast_src.Domain.Entities.Users.Users", "UpdateUser")
-                        .WithMany()
-                        .HasForeignKey("UpdateUserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("vefast_src.Domain.Entities.Users.Users", "User")
                         .WithMany()
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("ID_InsertUser")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("InsertUser");
-
-                    b.Navigation("UpdateUser");
-
                     b.Navigation("User");
-
-                    b.Navigation("UserGroup");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Attributes.Attributes", b =>
@@ -1030,12 +1659,17 @@ namespace vefast_src.Migrations
 
             modelBuilder.Entity("vefast_src.Domain.Entities.Orders.Orders", b =>
                 {
-                    b.Navigation("OrderItem");
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("vefast_src.Domain.Entities.ProductTypes.ProductTypes", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("vefast_src.Domain.Entities.Products.Products", b =>
+                {
+                    b.Navigation("Price");
                 });
 #pragma warning restore 612, 618
         }

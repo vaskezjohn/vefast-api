@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Orders
 {
     public interface IOrdersService
     {
-        IEnumerable<OrdersResponse> GetAllOrders();
+        ICollection<OrdersResponse> GetAllOrders();
         Task<OrdersResponse> CreateOrdersAsync(OrdersRequest objRequest);
         Task<OrdersResponse> GetOrdersByIdAsync(Guid id);
         Task DeleteOrdersById(Guid id);

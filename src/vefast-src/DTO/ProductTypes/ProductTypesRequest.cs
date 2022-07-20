@@ -8,7 +8,7 @@ namespace vefast_src.DTO.ProductTypes
 
     public class ProductTypesRequest
     {
-        public string ProductType { get; set; }
+        public string Name { get; set; }
         public bool Active { get; set; }
         public Guid ID_Product { get; set; }
         public ProductsRequest Product { get; set; }

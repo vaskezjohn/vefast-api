@@ -4,9 +4,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using vefast_src.Domain.Entities.Companies;
-
     public class Stores : BaseEntity
     {
+        [Required]
+        [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
         public bool Active { get; set; }
 

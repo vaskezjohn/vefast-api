@@ -1,8 +1,9 @@
 ﻿using System;
 namespace vefast_src.Domain.Repositories.AttributeValuesProductTypes
 {
-    using vefast_src.Domain.Entities.AttributeValuesProductTypes;
-    public interface IAttributeValuesProductTypesRepository : IGenericRepository<AttributeValuesProducts>
+    using vefast_src.Domain.Entities.ProductsAttributeValues;
+
+    public interface IAttributeValuesProductTypesRepository : IGenericRepository<ProductsAttributeValues>
     {
         
     }

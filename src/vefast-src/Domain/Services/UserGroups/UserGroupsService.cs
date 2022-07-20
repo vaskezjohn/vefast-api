@@ -35,9 +35,9 @@ namespace vefast_src.Domain.Services.UserGroups
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<UserGroupsResponse> GetAllUserGroup()
+        public ICollection<UserGroupsResponse> GetAllUserGroup()
         {
-            return _mapper.Map<IEnumerable<UserGroupsResponse>>(_user_groupRepository.GetAll());
+            return _mapper.Map<ICollection<UserGroupsResponse>>(_user_groupRepository.GetAll());
         }
 
         public async Task<UserGroupsResponse> CreateUserGroupAsync(UserGroupsRequest objRequest)

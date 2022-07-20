@@ -36,9 +36,9 @@ namespace vefast_src.Domain.Services.OrderItems
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<OrdersItemResponse> GetAllOrdersItem()
+        public ICollection<OrdersItemResponse> GetAllOrdersItem()
         {
-            return _mapper.Map<IEnumerable<OrdersItemResponse>>(_ordersItemRepository.GetAll());
+            return _mapper.Map<ICollection<OrdersItemResponse>>(_ordersItemRepository.GetAll());
         }
 
         public async Task<OrdersItemResponse> CreateOrdersItemAsync(OrdersItemRequest objRequest)

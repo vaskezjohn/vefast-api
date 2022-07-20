@@ -7,7 +7,7 @@ namespace vefast_src.DTO.Stock
 
     public class StockRequest
     {
-        public int Cantidad { get; set; }
+        public int Quantity { get; set; }
         public Guid ID_Product { get; set; }
         public ProductsRequest Product { get; set; }
     }

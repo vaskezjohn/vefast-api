@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.AttributeValuesProductTypes
 {
     public interface IAttributeValuesProductTypesService
     {
-        IEnumerable<AttributeValuesProductTypesResponse> GetAllAttributeValueTipoProducto();
+        ICollection<AttributeValuesProductTypesResponse> GetAllAttributeValueTipoProducto();
         Task<AttributeValuesProductTypesResponse> CreateAttributeValueTipoProductoAsync(AttributeValuesProductTypesRequest objRequest);
         Task<AttributeValuesProductTypesResponse> GetAttributeValueTipoProductoByIdAsync(Guid id);
         Task DeleteAttributeValueTipoProductoById(Guid id);

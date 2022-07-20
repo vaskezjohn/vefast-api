@@ -35,9 +35,9 @@ namespace vefast_src.Domain.Services.Companies
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<CompaniesResponse> GetAllCompany()
+        public ICollection<CompaniesResponse> GetAllCompany()
         {
-            return _mapper.Map<IEnumerable<CompaniesResponse>>(_companyRepository.GetAll());
+            return _mapper.Map<ICollection<CompaniesResponse>>(_companyRepository.GetAll());
         }
 
         public async Task<CompaniesResponse> CreateCompanyAsync(CompaniesRequest objRequest)
@@ -91,7 +91,7 @@ namespace vefast_src.Domain.Services.Companies
             }
 
             company.Address = objRequest.Address;
-            company.CompanyName = objRequest.CompanyName;
+            company.Name = objRequest.Name;
             company.Country = objRequest.Country;
             company.Currency = objRequest.Currency;
             company.Message = objRequest.Message;

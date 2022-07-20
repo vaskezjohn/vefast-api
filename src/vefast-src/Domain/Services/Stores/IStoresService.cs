@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Stores
 {
     public interface IStoresService
     {
-        IEnumerable<StoresResponse> GetAllStores();
+        ICollection<StoresResponse> GetAllStores();
         Task<StoresResponse> CreateStoresAsync(StoresRequest objRequest);
         Task<StoresResponse> GetStoresByIdAsync(Guid id);
         Task DeleteStoresById(Guid id);

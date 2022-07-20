@@ -34,9 +34,9 @@ namespace vefast_src.Domain.Services.AttributeValues
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<AttributeValuesResponse> GetAllAttributeValue()
+        public ICollection<AttributeValuesResponse> GetAllAttributeValue()
         {
-            return _mapper.Map<IEnumerable<AttributeValuesResponse>>(_attributeValueRepository.GetAll());
+            return _mapper.Map<ICollection<AttributeValuesResponse>>(_attributeValueRepository.GetAll());
         }
 
         public async Task<AttributeValuesResponse> CreateAttributeValueAsync(AttributeValuesRequest objRequest)

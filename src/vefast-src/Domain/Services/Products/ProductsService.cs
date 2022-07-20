@@ -20,9 +20,9 @@ namespace vefast_src.Domain.Services.Products
             this._productsRepository = productsRepository;
         }
 
-        public IEnumerable<ProductsResponse> GetAllProducts()
+        public ICollection<ProductsResponse> GetAllProducts()
         {
-            return _mapper.Map<IEnumerable<ProductsResponse>>(_productsRepository.GetAll());
+            return _mapper.Map<ICollection<ProductsResponse>>(_productsRepository.GetAll());
         }
 
         public async Task<ProductsResponse> CreateProductsAsync(ProductsRequest objRequest)

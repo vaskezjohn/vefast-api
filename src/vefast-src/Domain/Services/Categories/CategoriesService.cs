@@ -34,9 +34,9 @@ namespace vefast_src.Domain.Services.Categories
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<CategoriesResponse> GetAllCategories()
+        public ICollection<CategoriesResponse> GetAllCategories()
         {
-            return _mapper.Map<IEnumerable<CategoriesResponse>>(_categoriesRepository.GetAll());
+            return _mapper.Map<ICollection<CategoriesResponse>>(_categoriesRepository.GetAll());
         }
 
         public async Task<CategoriesResponse> CreateCategoriesAsync(CategoriesRequest objRequest)

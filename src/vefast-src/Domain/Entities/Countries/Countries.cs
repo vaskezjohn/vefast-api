@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace vefast_src.Domain.Entities.Countries
 {
-    public class Countries
+    public class Countries : BaseEntity
     {
         [Required]
         [Column(TypeName = "varchar(255)")]

@@ -11,7 +11,7 @@ namespace vefast_src.Domain.Entities.Prices
     {
 
         [Required]
-        [Column(TypeName = "money")]
+        [Column(TypeName = "decimal(15,2)")]
         public double Price { get; set; }
         public double Utility { get; set; }
 

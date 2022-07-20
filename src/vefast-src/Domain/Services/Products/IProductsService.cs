@@ -9,7 +9,7 @@ namespace vefast_src.Domain.Services.Products
 {
     public interface IProductsService
     {
-        IEnumerable<ProductsResponse> GetAllProducts();
+        ICollection<ProductsResponse> GetAllProducts();
         Task<ProductsResponse> CreateProductsAsync(ProductsRequest objRequest);
         Task<ProductsResponse> GetProductsByIdAsync(Guid id);
         Task DeleteProductsById(Guid id);

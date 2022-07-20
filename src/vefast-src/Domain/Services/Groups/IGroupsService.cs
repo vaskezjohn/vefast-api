@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Groups
 {
     public interface IGroupsService
     {
-        IEnumerable<GroupsResponse> GetAllGroups();
+        ICollection<GroupsResponse> GetAllGroups();
         Task<GroupsResponse> CreateGroupsAsync(GroupsRequest objRequest);
         Task<GroupsResponse> GetGroupsByIdAsync(Guid id);
         Task DeleteGroupsById(Guid id);

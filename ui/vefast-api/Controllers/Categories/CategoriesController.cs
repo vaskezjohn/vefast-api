@@ -12,11 +12,11 @@ using vefast_src.Domain.Repositories.Categories;
 using vefast_src.Domain.Services.Categories;
 using vefast_src.DTO.Categories;
 
-namespace vefast_api.Controllers
+namespace vefast_api.Controllers.Categories
 {
     //[Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoriesService _categoriesService;
@@ -55,7 +55,7 @@ namespace vefast_api.Controllers
 
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = e.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { e.Message });
             }
         }
 
@@ -80,7 +80,7 @@ namespace vefast_api.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = e.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { e.Message });
             }
 
         }
@@ -101,7 +101,7 @@ namespace vefast_api.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = e.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { e.Message });
             }
         }
 
@@ -135,7 +135,7 @@ namespace vefast_api.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = e.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { e.Message });
             }
 
         }

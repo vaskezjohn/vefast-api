@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Stock;
+using vefast_src.Domain.Entities.StockDeposits;
 using vefast_src.Domain.Repositories.Stock;
 using vefast_src.Domain.Services.Stock;
 using vefast_src.DTO.Stock;
@@ -31,7 +31,7 @@ namespace vefast_api.Controllers
         [HttpGet]
         [EnableQuery()]
         [Route("/odata/[controller]")]
-        public IQueryable<Stock> Get()
+        public IQueryable<StockDeposits> Get()
         {
             return _StockRepository.GetAll();
         }

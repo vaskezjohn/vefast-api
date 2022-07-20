@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.AttributeValuesProductTypes;
+using vefast_src.Domain.Entities.ProductsAttributeValues;
 using vefast_src.Domain.Repositories.AttributeValuesProductTypes;
 using vefast_src.Domain.Services.AttributeValuesProductTypes;
 using vefast_src.DTO.AttributeValuesProductTypes;
@@ -30,7 +30,7 @@ namespace vefast_api.Controllers
         [HttpGet]
         [EnableQuery()]
         [Route("/odata/[controller]")]
-        public IQueryable<AttributeValuesProducts> Get()
+        public IQueryable<ProductsAttributeValues> Get()
         {
             return _AttributeValueTipoProductoRepository.GetAll();
         }

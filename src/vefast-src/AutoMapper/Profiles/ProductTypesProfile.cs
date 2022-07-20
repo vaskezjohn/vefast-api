@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using vefast_src.Domain.Entities.Stock;
+using vefast_src.Domain.Entities.StockDeposits;
 using vefast_src.DTO.Stock;
 namespace vefast_src.AutoMapper.Profiles
 {
@@ -8,10 +8,10 @@ namespace vefast_src.AutoMapper.Profiles
     {
         public ProductTypesProfile()
         {
-            CreateMap<Stock, StockResponse>()
+            CreateMap<StockDeposits, StockResponse>()
                .ReverseMap()
                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<Stock, StockRequest>()
+            CreateMap<StockDeposits, StockRequest>()
                     .ReverseMap()
                     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }

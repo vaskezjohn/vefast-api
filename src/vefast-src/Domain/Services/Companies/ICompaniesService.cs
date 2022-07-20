@@ -7,7 +7,7 @@ namespace vefast_src.Domain.Services.Companies
 {
     public interface ICompaniesService
     {
-        IEnumerable<CompaniesResponse> GetAllCompany();
+        ICollection<CompaniesResponse> GetAllCompany();
         Task<CompaniesResponse> CreateCompanyAsync(CompaniesRequest objRequest);
         Task<CompaniesResponse> GetCompanyByIdAsync(Guid id);
         Task DeleteCompanyById(Guid id);

@@ -33,9 +33,9 @@ namespace vefast_src.Domain.Services.Brands
         //        return "CLI-1";
         //    }
         //}
-        public IEnumerable<BrandsResponse> GetAllBrands()
+        public ICollection<BrandsResponse> GetAllBrands()
         {
-            return _mapper.Map<IEnumerable<BrandsResponse>>(_brandsRepository.GetAll());
+            return _mapper.Map<ICollection<BrandsResponse>>(_brandsRepository.GetAll());
         }
 
         public async Task<BrandsResponse> CreateBrandsAsync(BrandsRequest objRequest)
