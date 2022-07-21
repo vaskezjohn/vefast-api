@@ -36,6 +36,7 @@ using vefast_src.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace vefast_api
 {
@@ -212,6 +213,7 @@ namespace vefast_api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1");
+                c.DocExpansion(DocExpansion.None);
             });
 
             app.UseCors(builder =>
