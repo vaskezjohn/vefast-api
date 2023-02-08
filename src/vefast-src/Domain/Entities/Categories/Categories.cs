@@ -13,7 +13,6 @@
         public bool Active { get; set; }
         public virtual ICollection<Products> Products { get; set; }
 
-        [Required]
         [ForeignKey("Category")]
         public Guid ID_ParentCategory { get; set; }
         public virtual Categories Category { get; set; }

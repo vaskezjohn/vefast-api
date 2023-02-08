@@ -32,7 +32,6 @@ using vefast_src.Domain.Repositories.ProductTypes;
 using vefast_src.Infrastructure.Repositories.AttributeValuesProductTypes;
 using vefast_src.Domain.Repositories.AttributeValuesProductTypes;
 
-
 namespace vefast_api.Extension.DependencyInjection
 {
     public static class Infrastructure
@@ -65,7 +64,6 @@ namespace vefast_api.Extension.DependencyInjection
             services.AddTransient<IStockRepository, StockRepositoryEF>();
             services.AddTransient<IProductTypesRepository, ProductTypesRepositoryEF>();
             services.AddTransient<IAttributeValuesProductTypesRepository, AttributeValuesProductTypesRepositoryEF>();
-
 
             return services;
         }

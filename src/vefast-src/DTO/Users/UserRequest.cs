@@ -13,5 +13,6 @@ namespace vefast_src.DTO.Users
         public string Password { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public List<Guid> Roles { get; set; }
     }
 }

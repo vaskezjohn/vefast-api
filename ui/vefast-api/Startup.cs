@@ -37,6 +37,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Serilog;
 
 namespace vefast_api
 {
@@ -45,6 +46,12 @@ namespace vefast_api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .WriteTo.MySQL(
+                    connectionString: configuration.GetConnectionString("vefast"))
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -161,6 +168,7 @@ namespace vefast_api
             //{
             //    options.KnownProxies.Add(IPAddress.Parse("93.188.167.3"));
             //});
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", build =>
@@ -196,7 +204,10 @@ namespace vefast_api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+                app.UseSwagger(c =>
+                {
+                    c.RouteTemplate = "swagger/{documentName}/swagger.json";
+                });
             }
             else
             {
@@ -212,8 +223,7 @@ namespace vefast_api
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "vefast_api v1");
-                c.DocExpansion(DocExpansion.None);
+                c.SwaggerEndpoint("v1/swagger.json", "VeFaSt API");
             });
 
             app.UseCors(builder =>
@@ -256,7 +266,14 @@ namespace vefast_api
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Companies>("Company");
             builder.EntitySet<Categories>("CategoriesOdata");
-            //categories.EntityType.Ignore(c => c.name);
+            var usersConfig = builder.EntitySet<Users>("UsersOdata");
+
+            usersConfig.EntityType.Ignore(c => c.PasswordHash);
+            usersConfig.EntityType.Ignore(c => c.AccessToken);
+            usersConfig.EntityType.Ignore(c => c.LockoutEnd);
+            usersConfig.EntityType.Ignore(c => c.ConcurrencyStamp);
+            usersConfig.EntityType.Ignore(c => c.SecurityStamp);
+
             return builder.GetEdmModel();
         }
 

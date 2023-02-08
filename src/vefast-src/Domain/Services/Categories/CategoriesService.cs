@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using vefast_src.Domain.Exceptions.Categories;
 using vefast_src.Domain.Repositories.Categories;
 using vefast_src.DTO.Categories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using vefast_src.Domain.Entities.Users;
+using System.Security.Claims;
 
 namespace vefast_src.Domain.Services.Categories
 {
@@ -13,11 +17,16 @@ namespace vefast_src.Domain.Services.Categories
     {
         private readonly IMapper _mapper;
         private readonly ICategoriesRepository _categoriesRepository;
+        //private readonly IProductsRepository _categoriesRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<Users> _userManager;
 
-        public CategoriesService(IMapper mapper, ICategoriesRepository categoriesRepository)
+        public CategoriesService(IMapper mapper, ICategoriesRepository categoriesRepository, IHttpContextAccessor httpContextAccessor, UserManager<Users> userManager)
         {
             this._mapper = mapper;
             this._categoriesRepository = categoriesRepository;
+            this._httpContextAccessor = httpContextAccessor;
+            this._userManager = userManager;
         }
 
         //private string GenerateCodigoVEFAST()
@@ -42,10 +51,29 @@ namespace vefast_src.Domain.Services.Categories
         public async Task<CategoriesResponse> CreateCategoriesAsync(CategoriesRequest objRequest)
         {
             var categories = _mapper.Map<Entities.Categories.Categories>(objRequest);
-            _categoriesRepository.Add(categories);
+
+            if (objRequest.ID_ParentCategory != Guid.Empty)
+            {
+                var parentCategory = await _categoriesRepository.GetByIDAsync(objRequest.ID_ParentCategory);
+
+                if (parentCategory == null)
+                    throw new CategoriesNotFoundException("Categoria relacionada no encontrada.");
+                else
+                    categories.ID_ParentCategory = parentCategory.ID;
+            }
+
+            //_accesor.HttpContext.User.GetUsername();
+
+
+            var userInsert = await _userManager.FindByIdAsync(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value);
+
+            categories.InsertDate = DateTime.Now;
+            categories.InsertUser = userInsert;
+            categories.Active = true;
 
             try
             {
+                _categoriesRepository.Add(categories);
                 await _categoriesRepository.SaveAsync();
             }
             catch (Exception)
@@ -80,7 +108,7 @@ namespace vefast_src.Domain.Services.Categories
             await _categoriesRepository.SaveAsync();
         }
 
-        public async Task<CategoriesResponse> EditCategoriesByIdAsync(Guid id, CategoriesRequest objRequest)
+        public async Task<CategoriesResponse> EditCategoriesByIdAsync(Guid id, CategoriesUpdateRequest objRequest)
         {
             var categories = await _categoriesRepository.GetByIDAsync(id);
 
@@ -90,7 +118,7 @@ namespace vefast_src.Domain.Services.Categories
             }
 
             categories.Name = objRequest.Name;
-            categories.Active = objRequest.Active;        
+            categories.Active = objRequest.Active;
 
             _categoriesRepository.Update(categories);
             await _categoriesRepository.SaveAsync();

@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AfipWsfeClient" Version="1.1.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
@@ -17,6 +19,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.17" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.21.0" />
+    <PackageReference Include="TimeZoneConverter" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -114,9 +117,7 @@
     <Folder Include="Domain\Repositories\Categories\" />
     <Folder Include="Domain\Repositories\Attributes\" />
     <Folder Include="Domain\Repositories\Orders\" />
-    <Folder Include="Domain\Repositories\Groups\" />
     <Folder Include="DTO\Brands\" />
-    <Folder Include="DTO\Categories\" />
     <Folder Include="DTO\Attributes\" />
     <Folder Include="DTO\Orders\" />
     <Folder Include="DTO\Groups\" />

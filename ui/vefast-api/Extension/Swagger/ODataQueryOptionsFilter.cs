@@ -20,10 +20,11 @@ namespace vefast_api.Extension.Swagger
                         {
                         new OpenApiSecurityScheme {
                             Reference = new OpenApiReference {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "bearer"
-                            }
-                        }, new string[] {}
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] {}
                         }
                     }
                 };

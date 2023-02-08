@@ -18,6 +18,7 @@ using vefast_src.Domain.Services.Stock;
 using vefast_src.Domain.Services.ProductTypes;
 using vefast_src.Domain.Services.AttributeValuesProductTypes;
 using vefast_src.Domain.Services.User;
+using vefast_src.Domain.Services.Afip;
 
 namespace vefast_api.Extension.DependencyInjection
 {
@@ -41,6 +42,7 @@ namespace vefast_api.Extension.DependencyInjection
             services.AddTransient<IProductTypesService, ProductTypesService>();
             services.AddTransient<IAttributeValuesProductTypesService, AttributeValuesProductTypesService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IAfipService, AfipService>();           
 
             return services;
         }

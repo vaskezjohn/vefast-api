@@ -1,48 +1,34 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
-//using Microsoft.AspNetCore.OData.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using vefast_src.Domain.Entities.Categories;
 using vefast_src.Domain.Repositories.Categories;
 using vefast_src.Domain.Services.Categories;
 using vefast_src.DTO.Categories;
 
 namespace vefast_api.Controllers.Categories
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoriesService _categoriesService;
-        private readonly ICategoriesRepository _categoriesRepository;
 
-        public CategoriesController(ICategoriesService categoriesService, ICategoriesRepository categoriesRepository)
+        public CategoriesController(ICategoriesService categoriesService)
         {
             _categoriesService = categoriesService;
-            _categoriesRepository = categoriesRepository;
         }
-
-        //[HttpGet]
-        //[EnableQuery()]
-        //[Route("/odata/[controller]")]
-        //public IQueryable<Categories> Get()
-        //{
-        //    return _categoriesRepository.GetAll();
-        //}
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoriesByIdAsync([FromRoute] string id)
         {
             try
             {
-                Guid g = Guid.NewGuid();
-
                 var categories = await _categoriesService.GetCategoriesByIdAsync(new Guid(id));
 
                 return StatusCode(StatusCodes.Status200OK, new { data = categories });
@@ -106,7 +92,7 @@ namespace vefast_api.Controllers.Categories
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCategoriesByIdAsync([FromRoute] string id, [FromBody] CategoriesRequest obj)
+        public async Task<IActionResult> EditCategoriesByIdAsync([FromRoute] string id, [FromBody] CategoriesUpdateRequest obj)
         {
 
             try

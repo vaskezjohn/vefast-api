@@ -11,7 +11,7 @@ namespace vefast_src.Domain.Services.Categories
         Task<CategoriesResponse> CreateCategoriesAsync(CategoriesRequest objRequest);
         Task<CategoriesResponse> GetCategoriesByIdAsync(Guid id);
         Task DeleteCategoriesById(Guid id);
-        Task<CategoriesResponse> EditCategoriesByIdAsync(Guid id, CategoriesRequest objRequest);
+        Task<CategoriesResponse> EditCategoriesByIdAsync(Guid id, CategoriesUpdateRequest objRequest);
 
     }
 }

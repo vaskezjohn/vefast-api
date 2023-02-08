@@ -2,17 +2,20 @@
 namespace vefast_src.Domain.Services.User
 {
     using global::AutoMapper;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
+    using TimeZoneConverter;
     using vefast_src.Domain.Constants;
     using vefast_src.Domain.Entities.Users;
     using vefast_src.Domain.Exceptions.Users;
@@ -23,13 +26,17 @@ namespace vefast_src.Domain.Services.User
 
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<Users> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UsersService(IConfiguration configuration, UserManager<Users> userManager, IMapper mapper)
+        public UsersService(IConfiguration configuration, UserManager<Users> userManager, IMapper mapper, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager)
         {
             this._configuration = configuration;
             this._userManager = userManager;
             this._mapper = mapper;
+            this._httpContextAccessor = httpContextAccessor;
+            this._roleManager = roleManager;    
         }
 
         public async Task<AuthenticateResponse> Token(AuthenticateRequest request)
@@ -57,7 +64,8 @@ namespace vefast_src.Domain.Services.User
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(CustomClaimTypes.FirstName, user.FirstName),
-                    new Claim(CustomClaimTypes.LastName, user.LastName)                    
+                    new Claim(CustomClaimTypes.LastName, user.LastName),
+                    new Claim(CustomClaimTypes.Company, user.LastName)
                 };
 
             foreach (var role in roles)
@@ -78,13 +86,14 @@ namespace vefast_src.Domain.Services.User
             if (!result.Succeeded)
                 IdentityErrorException.ThrowIdentityErrorException(result.Errors.First());
 
+            TimeZoneInfo cstZone = TZConvert.GetTimeZoneInfo("Argentina Standard Time");
+
             return new AuthenticateResponse()
             {
-                expires_in = tokenDescriptor.ValidTo,
+                expires_in = TimeZoneInfo.ConvertTimeFromUtc(tokenDescriptor.ValidTo, cstZone),
                 access_token = token,
                 token_type  = "Bearer",
                 refresh_token = refreshToken
-
             };
         }
 
@@ -104,12 +113,14 @@ namespace vefast_src.Domain.Services.User
 
             var token = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
 
+            TimeZoneInfo cstZone = TZConvert.GetTimeZoneInfo("Argentina Standard Time");
+
             return new AuthenticateResponse()
             {
-                expires_in = tokenDescriptor.ValidTo,
+                expires_in = TimeZoneInfo.ConvertTimeFromUtc(tokenDescriptor.ValidTo, cstZone),
                 access_token = token,
                 token_type = "Bearer",
-                refresh_token = user.RefreshToken
+                refresh_token = refreshToken
             };
         }
 
@@ -118,12 +129,16 @@ namespace vefast_src.Domain.Services.User
             var user = _mapper.Map<Users>(userRequest);
 
             var result = await _userManager.CreateAsync(user, userRequest.Password);
+
             if (!result.Succeeded)
-            {
                 IdentityErrorException.ThrowIdentityErrorException(result.Errors.First());
-            }
+            
+            var userInsert = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value);
 
             user = await _userManager.FindByEmailAsync(userRequest.Email);
+            user.ID_InsertUser = userInsert.Id;
+            user.InsertDate = DateTime.Now;
+
             return _mapper.Map<UserResponse>(user);
         }
 
